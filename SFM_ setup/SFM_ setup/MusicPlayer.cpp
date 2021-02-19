@@ -4,7 +4,7 @@
 MusicPlayer::MusicPlayer()
 	: mMusic()
 	, mFilenames()
-	, mVolume(100.f)
+	, mVolume(0.f)
 {
 	mFilenames[Music::MenuTheme] = "Media/Music/MenuTheme.ogg";
 	mFilenames[Music::MissionTheme] = "Media/Music/WYMM.ogg";

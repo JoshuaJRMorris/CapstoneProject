@@ -15,14 +15,22 @@ std::vector<AircraftData> initializeAircraftData()
 	data[Aircraft::Bird].hitpoints = 100;
 	data[Aircraft::Bird].speed = 400.f;
 	data[Aircraft::Bird].texture = Textures::Bird;
-	data[Aircraft::Bird].textureRect = sf::IntRect(0, 0, 113, 80);
+	data[Aircraft::Bird].textureRect = sf::IntRect(0, 0, 20, 20);
 	data[Aircraft::Bird].hasRollAnimation = false;
 
 	data[Aircraft::OpponentBird].hitpoints = 100;
 	data[Aircraft::OpponentBird].speed = 400.f;
-	data[Aircraft::OpponentBird].texture = Textures::Bird;
-	data[Aircraft::OpponentBird].textureRect = sf::IntRect(0, 0, 113, 80);
+	data[Aircraft::OpponentBird].texture = Textures::OpponentBird;
+	data[Aircraft::OpponentBird].textureRect = sf::IntRect(0, 0, 20, 20);
 	data[Aircraft::OpponentBird].hasRollAnimation = false;
+
+	//Just for demo purposes
+
+	data[Aircraft::GreyBird].hitpoints = 100;
+	data[Aircraft::GreyBird].speed = 400.f;
+	data[Aircraft::GreyBird].texture = Textures::GreyBird;
+	data[Aircraft::GreyBird].textureRect = sf::IntRect(0, 0, 20, 20);
+	data[Aircraft::GreyBird].hasRollAnimation = false;
 
 
 	data[Aircraft::Eagle].hitpoints = 100;

@@ -20,6 +20,7 @@ public:
 		Avenger,
 		Bird,
 		OpponentBird,
+		GreyBird,
 		TypeCount
 	};
 

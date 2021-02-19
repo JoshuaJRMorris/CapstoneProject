@@ -99,8 +99,9 @@ bool World::hasPlayerReachedEnd() const
 
 void World::loadTextures()
 {
-	mTextures.load(Textures::Bird, "Media/Textures/bird.png");
-	mTextures.load(Textures::OpponentBird, "Media/Textures/bird.png");
+	mTextures.load(Textures::Bird, "Media/Textures/Red1.png");
+	mTextures.load(Textures::OpponentBird, "Media/Textures/Blue1.png");
+	mTextures.load(Textures::GreyBird, "Media/Textures/Grey1.png");
 	mTextures.load(Textures::Entities, "Media/Textures/Entities.png");
 	mTextures.load(Textures::Jungle, "Media/Textures/birdBack.png");
 	mTextures.load(Textures::Explosion, "Media/Textures/Explosion.png");
@@ -289,6 +290,7 @@ void World::addEnemies()
 	//addEnemy(Aircraft::Raptor, 0.f, 4400.f);
 
 	addEnemy(Aircraft::OpponentBird, 400.f, 100.f);
+	addEnemy(Aircraft::GreyBird, 400.f, 0.f);
 
 
 	// Sort all enemies according to their y value, such that lower enemies are checked first for spawning

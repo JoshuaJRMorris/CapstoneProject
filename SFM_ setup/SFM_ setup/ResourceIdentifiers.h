@@ -21,6 +21,7 @@ namespace Textures
 		FinishLine,
 		Bird,
 		OpponentBird,
+		GreyBird,
 	};
 }
 
