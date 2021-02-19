@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\compiled finished game\SFM_ setup\SFM_ setup\</FILEPATH>
+      <FILENAME>World.h</FILENAME>
+      <LINE>66</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26812</DEFECTCODE>
+    <DESCRIPTION>The enum type 'Aircraft::Type' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
+    <FUNCTION>World::SpawnPoint::{ctor}</FUNCTION>
+    <DECORATED>??0SpawnPoint@World@@QAE@W4Type@Aircraft@@MM@Z</DECORATED>
+    <FUNCLINE>66</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>
