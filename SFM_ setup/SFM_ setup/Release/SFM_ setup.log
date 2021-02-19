@@ -1,0 +1,38 @@
+﻿  Aircraft.cpp
+C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\homework-JacobShannon316\Homework02\SFM_ setup\SFM_ setup\SceneNode.h(2,10): fatal error C1083: Cannot open include file: 'SFML/System/NonCopyable.hpp': No such file or directory
+  Application.cpp
+C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\homework-JacobShannon316\Homework02\SFM_ setup\SFM_ setup\Application.h(2,10): fatal error C1083: Cannot open include file: 'SFML/System/Time.hpp': No such file or directory
+  Command.cpp
+C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\homework-JacobShannon316\Homework02\SFM_ setup\SFM_ setup\Command.h(3,10): fatal error C1083: Cannot open include file: 'SFML/System/Time.hpp': No such file or directory
+  CommandQueue.cpp
+C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\homework-JacobShannon316\Homework02\SFM_ setup\SFM_ setup\Command.h(3,10): fatal error C1083: Cannot open include file: 'SFML/System/Time.hpp': No such file or directory
+  DataTables.cpp
+C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\homework-JacobShannon316\Homework02\SFM_ setup\SFM_ setup\DataTables.h(3,10): fatal error C1083: Cannot open include file: 'SFML/System/Time.hpp': No such file or directory
+  Entity.cpp
+C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\homework-JacobShannon316\Homework02\SFM_ setup\SFM_ setup\SceneNode.h(2,10): fatal error C1083: Cannot open include file: 'SFML/System/NonCopyable.hpp': No such file or directory
+  GameState.cpp
+C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\homework-JacobShannon316\Homework02\SFM_ setup\SFM_ setup\GameState.h(2,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  MenuState.cpp
+C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\homework-JacobShannon316\Homework02\SFM_ setup\SFM_ setup\StateIdentifiers.h(4,10): fatal error C1083: Cannot open include file: 'SFML/System/Time.hpp': No such file or directory
+  PauseState.cpp
+C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\homework-JacobShannon316\Homework02\SFM_ setup\SFM_ setup\StateIdentifiers.h(4,10): fatal error C1083: Cannot open include file: 'SFML/System/Time.hpp': No such file or directory
+  Player.cpp
+C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\homework-JacobShannon316\Homework02\SFM_ setup\SFM_ setup\Player.h(2,10): fatal error C1083: Cannot open include file: 'SFML/Window/Event.hpp': No such file or directory
+  SceneNode.cpp
+C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\homework-JacobShannon316\Homework02\SFM_ setup\SFM_ setup\SceneNode.h(2,10): fatal error C1083: Cannot open include file: 'SFML/System/NonCopyable.hpp': No such file or directory
+  Source.cpp
+C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\homework-JacobShannon316\Homework02\SFM_ setup\SFM_ setup\Game.h(2,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  SpriteNode.cpp
+C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\homework-JacobShannon316\Homework02\SFM_ setup\SFM_ setup\SceneNode.h(2,10): fatal error C1083: Cannot open include file: 'SFML/System/NonCopyable.hpp': No such file or directory
+  State.cpp
+C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\homework-JacobShannon316\Homework02\SFM_ setup\SFM_ setup\StateIdentifiers.h(4,10): fatal error C1083: Cannot open include file: 'SFML/System/Time.hpp': No such file or directory
+  StateStack.cpp
+C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\homework-JacobShannon316\Homework02\SFM_ setup\SFM_ setup\StateIdentifiers.h(4,10): fatal error C1083: Cannot open include file: 'SFML/System/Time.hpp': No such file or directory
+  TextNode.cpp
+C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\homework-JacobShannon316\Homework02\SFM_ setup\SFM_ setup\SceneNode.h(2,10): fatal error C1083: Cannot open include file: 'SFML/System/NonCopyable.hpp': No such file or directory
+  TitleState.cpp
+C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\homework-JacobShannon316\Homework02\SFM_ setup\SFM_ setup\StateIdentifiers.h(4,10): fatal error C1083: Cannot open include file: 'SFML/System/Time.hpp': No such file or directory
+  Utility.cpp
+C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\homework-JacobShannon316\Homework02\SFM_ setup\SFM_ setup\Utility.cpp(2,10): fatal error C1083: Cannot open include file: 'SFML/Graphics/Sprite.hpp': No such file or directory
+  World.cpp
+C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\homework-JacobShannon316\Homework02\SFM_ setup\SFM_ setup\SceneNode.h(2,10): fatal error C1083: Cannot open include file: 'SFML/System/NonCopyable.hpp': No such file or directory
