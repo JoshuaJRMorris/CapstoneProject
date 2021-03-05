@@ -1,6 +1,6 @@
 #include "Player.h"
 #include "CommandQueue.h"
-#include "Aircraft.h"
+#include "Actor.h"
 
 #include <map>
 #include <string>
@@ -16,9 +16,9 @@ struct AircraftMover
 	{
 	}
 
-	void operator() (Aircraft& aircraft, sf::Time) const
+	void operator() (Actor& actor, sf::Time) const
 	{
-		aircraft.accelerate(velocity * aircraft.getMaxSpeed());
+		actor.accelerate(velocity * actor.getMaxSpeed());
 	}
 
 	sf::Vector2f velocity;
@@ -103,12 +103,12 @@ Player::MissionStatus Player::getMissionStatus() const
 
 void Player::initializeActions()
 {
-	mActionBinding[MoveLeft].action = derivedAction<Aircraft>(AircraftMover(-1, 0));
-	mActionBinding[MoveRight].action = derivedAction<Aircraft>(AircraftMover(+1, 0));
-	mActionBinding[MoveUp].action = derivedAction<Aircraft>(AircraftMover(0, -1));
-	mActionBinding[MoveDown].action = derivedAction<Aircraft>(AircraftMover(0, +1));
-	mActionBinding[Fire].action = derivedAction<Aircraft>([](Aircraft& a, sf::Time) { a.fire(); });
-	mActionBinding[LaunchMissile].action = derivedAction<Aircraft>([](Aircraft& a, sf::Time) { a.launchMissile(); });
+	mActionBinding[MoveLeft].action = derivedAction<Actor>(AircraftMover(-1, 0));
+	mActionBinding[MoveRight].action = derivedAction<Actor>(AircraftMover(+1, 0));
+	mActionBinding[MoveUp].action = derivedAction<Actor>(AircraftMover(0, -1));
+	mActionBinding[MoveDown].action = derivedAction<Actor>(AircraftMover(0, +1));
+	mActionBinding[Fire].action = derivedAction<Actor>([](Actor& a, sf::Time) { a.fire(); });
+	mActionBinding[LaunchMissile].action = derivedAction<Actor>([](Actor& a, sf::Time) { a.launchMissile(); });
 }
 
 bool Player::isRealtimeAction(Action action)

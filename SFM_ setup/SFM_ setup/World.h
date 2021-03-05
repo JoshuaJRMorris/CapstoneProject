@@ -3,7 +3,7 @@
 #include "ResourceIdentifiers.h"
 #include "SceneNode.h"
 #include "SpriteNode.h"
-#include "Aircraft.h"
+#include "Actor.h"
 #include "CommandQueue.h"
 #include "Command.h"
 //#include "BloomEffect.h"
@@ -45,7 +45,7 @@ private:
 
 	void								buildScene();
 	void								addEnemies();
-	void								addEnemy(Aircraft::Type type, float relX, float relY);
+	void								addEnemy(Actor::Type type, float relX, float relY);
 	void								spawnEnemies();
 	void								destroyEntitiesOutsideView();
 	void								guideMissiles();
@@ -64,14 +64,14 @@ private:
 
 	struct SpawnPoint
 	{
-		SpawnPoint(Aircraft::Type type, float x, float y)
+		SpawnPoint(Actor::Type type, float x, float y)
 			: type(type)
 			, x(x)
 			, y(y)
 		{
 		}
 
-		Aircraft::Type type;
+		Actor::Type type;
 		float x;
 		float y;
 	};
@@ -92,10 +92,10 @@ private:
 	sf::FloatRect						mWorldBounds;
 	sf::Vector2f						mSpawnPosition;
 	float								mScrollSpeed;
-	Aircraft* mPlayerAircraft;
+	Actor* mPlayerAircraft;
 
 	std::vector<SpawnPoint>				mEnemySpawnPoints;
-	std::vector<Aircraft*>				mActiveEnemies;
+	std::vector<Actor*>				mActiveEnemies;
 
 	//BloomEffect							mBloomEffect;
 };

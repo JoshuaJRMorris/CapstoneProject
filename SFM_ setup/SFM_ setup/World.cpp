@@ -99,12 +99,13 @@ bool World::hasPlayerReachedEnd() const
 
 void World::loadTextures()
 {
-	mTextures.load(Textures::Bird, "Media/Textures/Red1.png");
-	mTextures.load(Textures::OpponentBird, "Media/Textures/Blue1.png");
+	mTextures.load(Textures::RedBird, "Media/Textures/Red1.png");
+	mTextures.load(Textures::BlueBird, "Media/Textures/Blue1.png");
 	mTextures.load(Textures::GreyBird, "Media/Textures/Grey1.png");
-	mTextures.load(Textures::Entities, "Media/Textures/Entities.png");
-	mTextures.load(Textures::Jungle, "Media/Textures/birdBack.png");
+	mTextures.load(Textures::BackgroundForest, "Media/Textures/birdBack.png");
 	mTextures.load(Textures::Explosion, "Media/Textures/Explosion.png");
+
+	mTextures.load(Textures::Entities, "Media/Textures/Entities.png");
 	mTextures.load(Textures::Particle, "Media/Textures/Particle.png");
 	mTextures.load(Textures::FinishLine, "Media/Textures/FinishLine.png");
 }
@@ -165,8 +166,8 @@ void World::handleCollisions()
 	{
 		if (matchesCategories(pair, Category::PlayerAircraft, Category::EnemyAircraft))
 		{
-			auto& player = static_cast<Aircraft&>(*pair.first);
-			auto& enemy = static_cast<Aircraft&>(*pair.second);
+			auto& player = static_cast<Actor&>(*pair.first);
+			auto& enemy = static_cast<Actor&>(*pair.second);
 
 			// Collision: Player damage = enemy's remaining HP
 			player.damage(enemy.getHitpoints());
@@ -175,7 +176,7 @@ void World::handleCollisions()
 
 		else if (matchesCategories(pair, Category::PlayerAircraft, Category::Pickup))
 		{
-			auto& player = static_cast<Aircraft&>(*pair.first);
+			auto& player = static_cast<Actor&>(*pair.first);
 			auto& pickup = static_cast<Pickup&>(*pair.second);
 
 			// Apply pickup effect to player, destroy projectile
@@ -187,7 +188,7 @@ void World::handleCollisions()
 		else if (matchesCategories(pair, Category::EnemyAircraft, Category::AlliedProjectile)
 			|| matchesCategories(pair, Category::PlayerAircraft, Category::EnemyProjectile))
 		{
-			auto& aircraft = static_cast<Aircraft&>(*pair.first);
+			auto& aircraft = static_cast<Actor&>(*pair.first);
 			auto& projectile = static_cast<Projectile&>(*pair.second);
 
 			// Apply projectile damage to aircraft, destroy projectile
@@ -220,7 +221,7 @@ void World::buildScene()
 	}
 
 	// Prepare the tiled background
-	sf::Texture& jungleTexture = mTextures.get(Textures::Jungle);
+	sf::Texture& jungleTexture = mTextures.get(Textures::BackgroundForest);
 	jungleTexture.setRepeated(true);
 
 	float viewHeight = mWorldView.getSize().y;
@@ -251,7 +252,7 @@ void World::buildScene()
 	mSceneGraph.attachChild(std::move(soundNode));
 
 	// Add player's aircraft
-	std::unique_ptr<Aircraft> player(new Aircraft(Aircraft::RedBird, mTextures, mFonts));
+	std::unique_ptr<Actor> player(new Actor(Actor::RedBird, mTextures, mFonts));
 	mPlayerAircraft = player.get();
 	mPlayerAircraft->setPosition(mSpawnPosition);
 	mPlayerAircraft->setScale(5, 5);
@@ -290,8 +291,8 @@ void World::addEnemies()
 	//addEnemy(Aircraft::Raptor, 200.f, 4200.f);
 	//addEnemy(Aircraft::Raptor, 0.f, 4400.f);
 
-	addEnemy(Aircraft::BlueBird, 400.f, 100.f);
-	addEnemy(Aircraft::GreyBird, 400.f, 0.f);
+	addEnemy(Actor::BlueBird, 400.f, 100.f);
+	addEnemy(Actor::GreyBird, 400.f, 0.f);
 
 
 	// Sort all enemies according to their y value, such that lower enemies are checked first for spawning
@@ -301,7 +302,7 @@ void World::addEnemies()
 		});
 }
 
-void World::addEnemy(Aircraft::Type type, float relX, float relY)
+void World::addEnemy(Actor::Type type, float relX, float relY)
 {
 	SpawnPoint spawn(type, mSpawnPosition.x + relX, mSpawnPosition.y - relY);
 	mEnemySpawnPoints.push_back(spawn);
@@ -315,7 +316,7 @@ void World::spawnEnemies()
 	{
 		SpawnPoint spawn = mEnemySpawnPoints.back();
 
-		std::unique_ptr<Aircraft> enemy(new Aircraft(spawn.type, mTextures, mFonts));
+		std::unique_ptr<Actor> enemy(new Actor(spawn.type, mTextures, mFonts));
 		enemy->setPosition(spawn.x, spawn.y);
 		enemy->setScale(5, 5);
 		//enemy->setRotation(180.f);
@@ -345,7 +346,7 @@ void World::guideMissiles()
 	// Setup command that stores all enemies in mActiveEnemies
 	Command enemyCollector;
 	enemyCollector.category = Category::EnemyAircraft;
-	enemyCollector.action = derivedAction<Aircraft>([this](Aircraft& enemy, sf::Time)
+	enemyCollector.action = derivedAction<Actor>([this](Actor& enemy, sf::Time)
 		{
 			if (!enemy.isDestroyed())
 				mActiveEnemies.push_back(&enemy);
@@ -361,10 +362,10 @@ void World::guideMissiles()
 				return;
 
 			float minDistance = std::numeric_limits<float>::max();
-			Aircraft* closestEnemy = nullptr;
+			Actor* closestEnemy = nullptr;
 
 			// Find closest enemy
-			for (Aircraft * enemy : mActiveEnemies)
+			for (Actor * enemy : mActiveEnemies)
 			{
 				float enemyDistance = distance(missile, *enemy);
 

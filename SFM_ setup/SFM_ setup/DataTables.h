@@ -9,7 +9,7 @@
 #include <functional>
 
 
-class Aircraft;
+class Actor;
 
 struct Direction
 {
@@ -44,7 +44,7 @@ struct ProjectileData
 
 struct PickupData
 {
-	std::function<void(Aircraft&)>	action;
+	std::function<void(Actor&)>	action;
 	Textures::ID					texture;
 	sf::IntRect						textureRect;
 };

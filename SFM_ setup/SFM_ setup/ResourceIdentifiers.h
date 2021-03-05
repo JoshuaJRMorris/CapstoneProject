@@ -13,14 +13,14 @@ namespace Textures
 	enum ID
 	{
 		Entities,
-		Jungle,
+		BackgroundForest,
 		TitleScreen,
 		Buttons,
 		Explosion,
 		Particle,
 		FinishLine,
-		Bird,
-		OpponentBird,
+		RedBird,
+		BlueBird,
 		GreyBird,
 	};
 }
