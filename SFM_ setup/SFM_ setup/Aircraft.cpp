@@ -38,8 +38,8 @@ Aircraft::Aircraft(Type type, const TextureHolder& textures, const FontHolder& f
 	, mDropPickupCommand()
 	, mTravelledDistance(0.f)
 	, mDirectionIndex(0)
-	, mHealthDisplay(nullptr)
-	, mMissileDisplay(nullptr)
+//	, mHealthDisplay(nullptr)
+//	, mMissileDisplay(nullptr)
 {
 	mExplosion.setFrameSize(sf::Vector2i(256, 256));
 	mExplosion.setNumFrames(16);
@@ -78,7 +78,7 @@ Aircraft::Aircraft(Type type, const TextureHolder& textures, const FontHolder& f
 		attachChild(std::move(missileDisplay));
 	}
 
-	updateTexts();
+	//updateTexts();
 }
 
 void Aircraft::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
@@ -92,13 +92,13 @@ void Aircraft::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) co
 void Aircraft::updateCurrent(sf::Time dt, CommandQueue& commands)
 {
 	// Update texts and roll animation
-	updateTexts();
+	//updateTexts();
 	updateRollAnimation();
 
 	// Entity has been destroyed: Possibly drop pickup, mark for removal
 	if (isDestroyed())
 	{
-		checkPickupDrop(commands);
+		//checkPickupDrop(commands);
 		mExplosion.update(dt);
 
 		// Play explosion sound only once
@@ -146,7 +146,7 @@ void Aircraft::remove()
 
 bool Aircraft::isAllied() const
 {
-	return mType == Bird;
+	return mType == RedBird;
 }
 
 float Aircraft::getMaxSpeed() const

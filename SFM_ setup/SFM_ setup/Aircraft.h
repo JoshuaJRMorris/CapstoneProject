@@ -18,8 +18,8 @@ public:
 		Eagle,
 		Raptor,
 		Avenger,
-		Bird,
-		OpponentBird,
+		RedBird,
+		BlueBird,
 		GreyBird,
 		TypeCount
 	};

@@ -251,9 +251,10 @@ void World::buildScene()
 	mSceneGraph.attachChild(std::move(soundNode));
 
 	// Add player's aircraft
-	std::unique_ptr<Aircraft> player(new Aircraft(Aircraft::Bird, mTextures, mFonts));
+	std::unique_ptr<Aircraft> player(new Aircraft(Aircraft::RedBird, mTextures, mFonts));
 	mPlayerAircraft = player.get();
 	mPlayerAircraft->setPosition(mSpawnPosition);
+	mPlayerAircraft->setScale(5, 5);
 	mSceneLayers[UpperAir]->attachChild(std::move(player));
 
 	// Add enemy aircraft
@@ -289,7 +290,7 @@ void World::addEnemies()
 	//addEnemy(Aircraft::Raptor, 200.f, 4200.f);
 	//addEnemy(Aircraft::Raptor, 0.f, 4400.f);
 
-	addEnemy(Aircraft::OpponentBird, 400.f, 100.f);
+	addEnemy(Aircraft::BlueBird, 400.f, 100.f);
 	addEnemy(Aircraft::GreyBird, 400.f, 0.f);
 
 
@@ -316,6 +317,7 @@ void World::spawnEnemies()
 
 		std::unique_ptr<Aircraft> enemy(new Aircraft(spawn.type, mTextures, mFonts));
 		enemy->setPosition(spawn.x, spawn.y);
+		enemy->setScale(5, 5);
 		//enemy->setRotation(180.f);
 
 		mSceneLayers[UpperAir]->attachChild(std::move(enemy));
