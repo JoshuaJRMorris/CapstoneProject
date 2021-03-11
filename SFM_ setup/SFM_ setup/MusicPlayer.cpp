@@ -6,8 +6,8 @@ MusicPlayer::MusicPlayer()
 	, mFilenames()
 	, mVolume(0.f)
 {
-	mFilenames[Music::MenuTheme] = "Media/Music/MenuTheme.ogg";
-	mFilenames[Music::MissionTheme] = "Media/Music/WYMM.ogg";
+	mFilenames[Music::MenuTheme] = "Media/Music/DONLV.ogg";
+	mFilenames[Music::MissionTheme] = "Media/Music/Monster.ogg";
 }
 
 void MusicPlayer::play(Music::ID theme)
@@ -17,9 +17,9 @@ void MusicPlayer::play(Music::ID theme)
 	if (!mMusic.openFromFile(filename))
 		throw std::runtime_error("Music " + filename + " could not be loaded.");
 
-	//mMusic.setVolume(mVolume);
+	mMusic.setVolume(mVolume);
 	mMusic.setLoop(true);
-	//mMusic.play();
+	mMusic.play();
 }
 
 void MusicPlayer::stop()

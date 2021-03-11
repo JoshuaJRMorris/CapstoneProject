@@ -292,7 +292,7 @@ void World::addEnemies()
 	//addEnemy(Aircraft::Raptor, 0.f, 4400.f);
 
 	addEnemy(Actor::BlueBird, 400.f, 100.f);
-	addEnemy(Actor::GreyBird, 400.f, 0.f);
+	//addEnemy(Actor::GreyBird, 400.f, 0.f);
 
 
 	// Sort all enemies according to their y value, such that lower enemies are checked first for spawning
