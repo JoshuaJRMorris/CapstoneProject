@@ -20,6 +20,7 @@ namespace Textures
 
 
 		RedBird,
+		BlueBird,
 
 	};
 }

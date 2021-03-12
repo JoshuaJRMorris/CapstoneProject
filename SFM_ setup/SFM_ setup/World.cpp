@@ -99,7 +99,8 @@ bool World::hasPlayerReachedEnd() const
 
 void World::loadTextures()
 {
-	mTextures.load(Textures::RedBird, "Media/Textures/RedBirdSolo.png");
+	mTextures.load(Textures::RedBird, "Media/Textures/Birds.png");
+	mTextures.load(Textures::BlueBird, "Media/Textures/Birds.png");
 
 
 	mTextures.load(Textures::BackgroundForest, "Media/Textures/birdBack.png");
@@ -266,7 +267,7 @@ void World::addEnemies()
 	//addEnemy(Aircraft::Raptor, 200.f, 4200.f);
 	//addEnemy(Aircraft::Raptor, 0.f, 4400.f);
 
-	//addEnemy(Actor::BlueBird, 400.f, 100.f);
+	addEnemy(Actor::Type::BlueBird, 400.f, 100.f);
 	//addEnemy(Actor::GreyBird, 400.f, 0.f);
 
 

@@ -14,6 +14,7 @@ public:
 	{
 
 		RedBird,
+		BlueBird,
 
 		TypeCount
 	};

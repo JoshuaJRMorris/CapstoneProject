@@ -39,7 +39,11 @@ Actor::Actor(Type type, const TextureHolder& textures, const FontHolder& fonts)
 	{
 	case Actor::Type::RedBird:
 		state_ = State::Idle;
-		setScale(5.f, 5.f);
+		setScale(7.f, 7.f);
+		break;
+	case Actor::Type::BlueBird:
+		state_ = State::Idle;
+		setScale(7.f, 7.f);
 		break;
 
 	default:
@@ -81,7 +85,7 @@ void Actor::updateCurrent(sf::Time dt, CommandQueue& commands)
 			direction_ = Direction::Left;
 	}
 
-	if (direction_ == Direction::Right || direction_ == Direction::Up)
+	if (direction_ == Direction::Left || direction_ == Direction::Down)
 		rec = flip(rec);
 
 
@@ -99,6 +103,9 @@ unsigned int Actor::getCategory() const
 	{
 	case Type::RedBird:
 		return Category::PlayerCharacter;
+		break;
+	case Type::BlueBird:
+		return Category::EnemyCharacter;
 		break;
 	}
 }
