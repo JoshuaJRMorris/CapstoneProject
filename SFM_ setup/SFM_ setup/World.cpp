@@ -39,7 +39,7 @@ World::World(sf::RenderTarget& outputTarget, FontHolder& fonts, SoundPlayer& sou
 void World::update(sf::Time dt)
 {
 	// Scroll the world, reset player velocity
-	//mWorldView.move(0.f, mScrollSpeed * dt.asSeconds());
+	mWorldView.move(0.f, mScrollSpeed * dt.asSeconds());
 	mPlayerAircraft->setVelocity(0.f, 0.f);
 
 	// Setup commands to destroy entities, and guide missiles
@@ -99,14 +99,15 @@ bool World::hasPlayerReachedEnd() const
 
 void World::loadTextures()
 {
-	mTextures.load(Textures::RedBird, "Media/Textures/RedBird.png");
-
-
+	mTextures.load(Textures::RedBird, "Media/Textures/Red1.png");
+	mTextures.load(Textures::BlueBird, "Media/Textures/Blue1.png");
+	mTextures.load(Textures::GreyBird, "Media/Textures/Grey1.png");
 	mTextures.load(Textures::BackgroundForest, "Media/Textures/birdBack.png");
 	mTextures.load(Textures::Explosion, "Media/Textures/Explosion.png");
 
-
-
+	mTextures.load(Textures::Entities, "Media/Textures/Entities.png");
+	mTextures.load(Textures::Particle, "Media/Textures/Particle.png");
+	mTextures.load(Textures::FinishLine, "Media/Textures/FinishLine.png");
 }
 
 void World::adaptPlayerPosition()
@@ -161,21 +162,40 @@ void World::handleCollisions()
 	std::set<SceneNode::Pair> collisionPairs;
 	mSceneGraph.checkSceneCollision(mSceneGraph, collisionPairs);
 
-	if (!collisionPairs.empty())
+	for (SceneNode::Pair pair : collisionPairs)
 	{
-		for (auto pair : collisionPairs)
+		if (matchesCategories(pair, Category::PlayerAircraft, Category::EnemyAircraft))
 		{
-			if (matchesCategories(pair, Category::PlayerCharacter, Category::EnemyCharacter)) {
-				auto& player = static_cast<Actor&>(*pair.first);
-				auto& enemy = static_cast<Actor&>(*pair.second);
+			auto& player = static_cast<Actor&>(*pair.first);
+			auto& enemy = static_cast<Actor&>(*pair.second);
 
-				player.setState(Actor::State::Dead);
+			// Collision: Player damage = enemy's remaining HP
+			player.damage(enemy.getHitpoints());
+			enemy.destroy();
+		}
 
-			}
-			
+		else if (matchesCategories(pair, Category::PlayerAircraft, Category::Pickup))
+		{
+			auto& player = static_cast<Actor&>(*pair.first);
+			auto& pickup = static_cast<Pickup&>(*pair.second);
+
+			// Apply pickup effect to player, destroy projectile
+			pickup.apply(player);
+			pickup.destroy();
+			player.playLocalSound(mCommandQueue, SoundEffect::CollectPickup);
+		}
+
+		else if (matchesCategories(pair, Category::EnemyAircraft, Category::AlliedProjectile)
+			|| matchesCategories(pair, Category::PlayerAircraft, Category::EnemyProjectile))
+		{
+			auto& aircraft = static_cast<Actor&>(*pair.first);
+			auto& projectile = static_cast<Projectile&>(*pair.second);
+
+			// Apply projectile damage to aircraft, destroy projectile
+			aircraft.damage(projectile.getDamage());
+			projectile.destroy();
 		}
 	}
-
 }
 
 void World::updateSounds()
@@ -213,6 +233,11 @@ void World::buildScene()
 	jungleSprite->setPosition(mWorldBounds.left, mWorldBounds.top - viewHeight);
 	mSceneLayers[Background]->attachChild(std::move(jungleSprite));
 
+	// Add the finish line to the scene
+	sf::Texture& finishTexture = mTextures.get(Textures::FinishLine);
+	std::unique_ptr<SpriteNode> finishSprite(new SpriteNode(finishTexture));
+	finishSprite->setPosition(0.f, -76.f);
+	mSceneLayers[Background]->attachChild(std::move(finishSprite));
 
 
 
@@ -220,14 +245,14 @@ void World::buildScene()
 	std::unique_ptr<SoundNode> soundNode(new SoundNode(mSounds));
 	mSceneGraph.attachChild(std::move(soundNode));
 
-	// Add player's character
-	std::unique_ptr<Actor> player(new Actor(Actor::Type::RedBird, mTextures, mFonts));
+	// Add player's aircraft
+	std::unique_ptr<Actor> player(new Actor(Actor::RedBird, mTextures, mFonts));
 	mPlayerAircraft = player.get();
 	mPlayerAircraft->setPosition(mSpawnPosition);
-	//mPlayerAircraft->setScale(5, 5);
+	mPlayerAircraft->setScale(5, 5);
 	mSceneLayers[UpperAir]->attachChild(std::move(player));
 
-	// Add enemy 
+	// Add enemy aircraft
 	addEnemies();
 }
 
@@ -260,7 +285,7 @@ void World::addEnemies()
 	//addEnemy(Aircraft::Raptor, 200.f, 4200.f);
 	//addEnemy(Aircraft::Raptor, 0.f, 4400.f);
 
-	//addEnemy(Actor::BlueBird, 400.f, 100.f);
+	addEnemy(Actor::BlueBird, 400.f, 100.f);
 	//addEnemy(Actor::GreyBird, 400.f, 0.f);
 
 
@@ -299,60 +324,60 @@ void World::spawnEnemies()
 
 void World::destroyEntitiesOutsideView()
 {
-	//Command command;
-	//command.category = Category::Projectile | Category::EnemyAircraft;
-	//command.action = derivedAction<Entity>([this](Entity& e, sf::Time)
-	//	{
-	//		if (!getBattlefieldBounds().intersects(e.getBoundingRect()))
-	//			e.remove();
-	//	});
+	Command command;
+	command.category = Category::Projectile | Category::EnemyAircraft;
+	command.action = derivedAction<Entity>([this](Entity& e, sf::Time)
+		{
+			if (!getBattlefieldBounds().intersects(e.getBoundingRect()))
+				e.remove();
+		});
 
-	//mCommandQueue.push(command);
+	mCommandQueue.push(command);
 }
 
 void World::guideMissiles()
 {
-	//// Setup command that stores all enemies in mActiveEnemies
-	//Command enemyCollector;
-	//enemyCollector.category = Category::EnemyAircraft;
-	//enemyCollector.action = derivedAction<Actor>([this](Actor& enemy, sf::Time)
-	//	{
-	//		if (!enemy.isDestroyed())
-	//			mActiveEnemies.push_back(&enemy);
-	//	});
+	// Setup command that stores all enemies in mActiveEnemies
+	Command enemyCollector;
+	enemyCollector.category = Category::EnemyAircraft;
+	enemyCollector.action = derivedAction<Actor>([this](Actor& enemy, sf::Time)
+		{
+			if (!enemy.isDestroyed())
+				mActiveEnemies.push_back(&enemy);
+		});
 
-	//// Setup command that guides all missiles to the enemy which is currently closest to the player
-	//Command missileGuider;
-	//missileGuider.category = Category::AlliedProjectile;
-	//missileGuider.action = derivedAction<Projectile>([this](Projectile& missile, sf::Time)
-	//	{
-	//		// Ignore unguided bullets
-	//		if (!missile.isGuided())
-	//			return;
+	// Setup command that guides all missiles to the enemy which is currently closest to the player
+	Command missileGuider;
+	missileGuider.category = Category::AlliedProjectile;
+	missileGuider.action = derivedAction<Projectile>([this](Projectile& missile, sf::Time)
+		{
+			// Ignore unguided bullets
+			if (!missile.isGuided())
+				return;
 
-	//		float minDistance = std::numeric_limits<float>::max();
-	//		Actor* closestEnemy = nullptr;
+			float minDistance = std::numeric_limits<float>::max();
+			Actor* closestEnemy = nullptr;
 
-	//		// Find closest enemy
-	//		for (Actor * enemy : mActiveEnemies)
-	//		{
-	//			float enemyDistance = distance(missile, *enemy);
+			// Find closest enemy
+			for (Actor * enemy : mActiveEnemies)
+			{
+				float enemyDistance = distance(missile, *enemy);
 
-	//			if (enemyDistance < minDistance)
-	//			{
-	//				closestEnemy = enemy;
-	//				minDistance = enemyDistance;
-	//			}
-	//		}
+				if (enemyDistance < minDistance)
+				{
+					closestEnemy = enemy;
+					minDistance = enemyDistance;
+				}
+			}
 
-	//		if (closestEnemy)
-	//			missile.guideTowards(closestEnemy->getWorldPosition());
-	//	});
+			if (closestEnemy)
+				missile.guideTowards(closestEnemy->getWorldPosition());
+		});
 
-	//// Push commands, reset active enemies
-	//mCommandQueue.push(enemyCollector);
-	//mCommandQueue.push(missileGuider);
-	//mActiveEnemies.clear();
+	// Push commands, reset active enemies
+	mCommandQueue.push(enemyCollector);
+	mCommandQueue.push(missileGuider);
+	mActiveEnemies.clear();
 }
 
 sf::FloatRect World::getViewBounds() const

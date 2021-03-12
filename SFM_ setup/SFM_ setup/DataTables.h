@@ -7,9 +7,9 @@
 
 #include <vector>
 #include <functional>
-#include <map>
-#include "Actor.h"
 
+
+class Actor;
 
 struct Direction
 {
@@ -22,7 +22,7 @@ struct Direction
 	float angle;
 	float distance;
 };
-/*
+
 struct AircraftData
 {
 	int								hitpoints;
@@ -44,31 +44,20 @@ struct ProjectileData
 
 struct PickupData
 {
-	std::function<void(Aircraft&)>	action;
+	std::function<void(Actor&)>	action;
 	Textures::ID					texture;
 	sf::IntRect						textureRect;
 };
-*/
+
 struct ParticleData
 {
 	sf::Color						color;
 	sf::Time						lifetime;
 };
-struct ActorData
-{
-	int		hitPoints;
-	int		damageDone;
-	float	speed;
-	Textures::ID texture;
-	std::map<Actor::State, Animation2> animations;
-	std::vector<Direction>	directions;
-};
 
-/*
+
 std::vector<AircraftData>	initializeAircraftData();
 std::vector<ProjectileData>	initializeProjectileData();
 std::vector<PickupData>		initializePickupData();
-*/
-std::map<Actor::Type, ActorData>	initializeActorData();
 std::vector<ParticleData>	initializeParticleData();
 

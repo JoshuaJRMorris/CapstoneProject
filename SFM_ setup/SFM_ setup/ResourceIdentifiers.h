@@ -17,10 +17,11 @@ namespace Textures
 		TitleScreen,
 		Buttons,
 		Explosion,
-
-
+		Particle,
+		FinishLine,
 		RedBird,
-
+		BlueBird,
+		GreyBird,
 	};
 }
 
