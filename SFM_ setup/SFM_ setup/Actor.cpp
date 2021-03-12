@@ -53,6 +53,15 @@ Actor::Actor(Type type, const TextureHolder& textures, const FontHolder& fonts)
 
 }
 
+void Actor::updateStates()
+{
+	if (isDestroyed())
+		state_ = Actor::State::Dead;
+
+	
+		state_ = Actor::State::Fly;
+}
+
 void Actor::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
 {
 
@@ -61,29 +70,19 @@ void Actor::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
 
 void Actor::updateCurrent(sf::Time dt, CommandQueue& commands)
 {
-	//updateStates();
+	updateStates();
 
 	auto rec = animations_.at(state_).update(dt);
-	if (mType == Actor::Type::RedBird)
-	{
-		switch (state_)
-		{
-		case Actor::State::MoveUp:
-			direction_ = Direction::Up;
-			break;
-		case Actor::State::MoveDown:
-			direction_ = Direction::Down;
-			break;
-		case Actor::State::MoveLeft:
-			direction_ = Direction::Left;
-			break;
-		case Actor::State::MoveRight:
+
+	if (state_ != State::Dead) {
+		if (direction_ == Direction::Left && getVelocity().x > 0)
 			direction_ = Direction::Right;
-			break;
-		default:
-			break;
-		}
+		if (direction_ == Direction::Right && getVelocity().y < 0)
+			direction_ = Direction::Left;
 	}
+
+	if (direction_ == Direction::Right || direction_ == Direction::Up)
+		rec = flip(rec);
 
 
 	mSprite.setTextureRect(rec);

@@ -9,9 +9,9 @@ namespace Category
 
 		EnemyCharacter = 1 << 3,
 
-		ParticleSystem = 1 << 7,
+		
 		SoundEffect = 1 << 8,
 
-
+		SceneSprite = 1,
 	};
 }

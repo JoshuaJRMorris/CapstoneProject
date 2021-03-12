@@ -4,6 +4,7 @@
 #include <SFML/Window/Event.hpp>
 
 #include <map>
+#include <SFML/System/Clock.hpp>
 
 
 class CommandQueue;
@@ -45,6 +46,10 @@ public:
 private:
 	void					initializeActions();
 	static bool				isRealtimeAction(Action action);
+
+	sf::Clock				clock;
+	sf::Time				timeSinceLastUpdate = sf::Time::Zero;
+	sf::Time				dt;
 
 
 private:

@@ -49,11 +49,11 @@ struct PickupData
 	sf::IntRect						textureRect;
 };
 */
-struct ParticleData
-{
-	sf::Color						color;
-	sf::Time						lifetime;
-};
+//struct ParticleData
+//{
+//	sf::Color						color;
+//	sf::Time						lifetime;
+//};
 struct ActorData
 {
 	int		hitPoints;
@@ -70,5 +70,5 @@ std::vector<ProjectileData>	initializeProjectileData();
 std::vector<PickupData>		initializePickupData();
 */
 std::map<Actor::Type, ActorData>	initializeActorData();
-std::vector<ParticleData>	initializeParticleData();
+//std::vector<ParticleData>	initializeParticleData();
 

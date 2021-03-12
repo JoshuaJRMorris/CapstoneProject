@@ -12,16 +12,13 @@ class Actor : public Entity
 public:
 	enum  class Type
 	{
-		Eagle,
-		Raptor,
-		Avenger,
+
 		RedBird,
-		BlueBird,
-		GreyBird,
+
 		TypeCount
 	};
 	enum class State {
-		Dead, Idle, MoveUp, MoveDown, MoveLeft, MoveRight
+		Dead, Idle, Fly
 	};
 	enum class Direction
 	{

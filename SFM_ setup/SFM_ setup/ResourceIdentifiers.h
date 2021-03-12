@@ -16,7 +16,7 @@ namespace Textures
 		BackgroundForest,
 		TitleScreen,
 		Buttons,
-		Explosion,
+
 
 
 		RedBird,
@@ -24,16 +24,16 @@ namespace Textures
 	};
 }
 
-namespace Shaders
-{
-	enum ID
-	{
-		BrightnessPass,
-		DownSamplePass,
-		GaussianBlurPass,
-		AddPass,
-	};
-}
+//namespace Shaders
+//{
+//	enum ID
+//	{
+//		BrightnessPass,
+//		DownSamplePass,
+//		GaussianBlurPass,
+//		AddPass,
+//	};
+//}
 
 namespace Fonts
 {
@@ -73,6 +73,6 @@ class ResourceHolder;
 
 typedef ResourceHolder<sf::Texture, Textures::ID>			TextureHolder;
 typedef ResourceHolder<sf::Font, Fonts::ID>					FontHolder;
-typedef ResourceHolder<sf::Shader, Shaders::ID>				ShaderHolder;
+//typedef ResourceHolder<sf::Shader, Shaders::ID>				ShaderHolder;
 typedef ResourceHolder<sf::SoundBuffer, SoundEffect::ID>	SoundBufferHolder;
 

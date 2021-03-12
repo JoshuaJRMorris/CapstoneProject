@@ -9,9 +9,9 @@
 using namespace std::placeholders;
 
 
-struct AircraftMover
+struct ActorMover
 {
-	AircraftMover(float vx, float vy)
+	ActorMover(float vx, float vy)
 		: velocity(vx, vy)
 	{
 	}
@@ -36,6 +36,11 @@ Player::Player()
 	// Set initial action bindings
 	initializeActions();
 
+	sf::Clock clock;
+	sf::Time timeSinceLastUpdate = sf::Time::Zero;
+	sf::Time dt = clock.restart();
+	timeSinceLastUpdate += dt;
+
 	// Assign all categories to player's aircraft
 	for (auto& pair : mActionBinding)
 		pair.second.category = Category::PlayerCharacter;
@@ -55,12 +60,14 @@ void Player::handleEvent(const sf::Event& event, CommandQueue& commands)
 void Player::handleRealtimeInput(CommandQueue& commands)
 {
 	// Traverse all assigned keys and check if they are pressed
+	timeSinceLastUpdate += dt;
 	for (auto pair : mKeyBinding)
 	{
 		// If key is pressed, lookup action and trigger corresponding command
 		if (sf::Keyboard::isKeyPressed(pair.first) && isRealtimeAction(pair.second))
 			commands.push(mActionBinding[pair.second]);
 	}
+	sf::Time dt = clock.restart();
 }
 
 void Player::assignKey(Action action, sf::Keyboard::Key key)
@@ -101,10 +108,40 @@ Player::MissionStatus Player::getMissionStatus() const
 
 void Player::initializeActions()
 {
-	mActionBinding[MoveLeft].action = derivedAction<Actor>(AircraftMover(-1, 0));
-	mActionBinding[MoveRight].action = derivedAction<Actor>(AircraftMover(+1, 0));
-	mActionBinding[MoveUp].action = derivedAction<Actor>(AircraftMover(0, -1));
-	mActionBinding[MoveDown].action = derivedAction<Actor>(AircraftMover(0, +1));
+	//mActionBinding[MoveLeft].action = derivedAction<Actor>(ActorMover(-1, 0));
+	//mActionBinding[MoveRight].action = derivedAction<Actor>(ActorMover(+1, 0));
+	//mActionBinding[MoveUp].action = derivedAction<Actor>(ActorMover(0, -1));
+	//mActionBinding[MoveDown].action = derivedAction<Actor>(ActorMover(0, +1));
+
+	const float playerSpeed = 400.f;
+	mActionBinding[MoveLeft].action = derivedAction<Actor>([playerSpeed](Actor& a, sf::Time dt)
+		{
+			a.setDirection(Actor::Direction::Left);
+			a.setState(Actor::State::Fly);
+			a.accelerate(sf::Vector2f(-playerSpeed, 0.f));
+		}
+	);
+	mActionBinding[MoveRight].action = derivedAction<Actor>([playerSpeed](Actor& a, sf::Time dt)
+		{
+			a.setDirection(Actor::Direction::Right);
+			a.setState(Actor::State::Fly);
+			a.accelerate(sf::Vector2f(playerSpeed, 0.f));
+		}
+	);
+	mActionBinding[MoveUp].action = derivedAction<Actor>([playerSpeed](Actor& a, sf::Time dt)
+		{
+			a.setDirection(Actor::Direction::Up);
+			a.setState(Actor::State::Fly);
+			a.accelerate(sf::Vector2f(0.f, -playerSpeed));
+		}
+	);
+	mActionBinding[MoveDown].action = derivedAction<Actor>([playerSpeed](Actor& a, sf::Time dt)
+		{
+			a.setDirection(Actor::Direction::Down);
+			a.setState(Actor::State::Fly);
+			a.accelerate(sf::Vector2f(0.f, playerSpeed));
+		}
+	);
 
 }
 

@@ -152,6 +152,14 @@ void centerOrigin(Animation& animation)
 	animation.setOrigin(std::floor(bounds.left + bounds.width / 2.f), std::floor(bounds.top + bounds.height / 2.f));
 }
 
+sf::IntRect flip(const sf::IntRect& rec)
+{
+	auto tmp = rec;
+	tmp.left += tmp.width;
+	tmp.width *= -1;
+	return tmp;
+}
+
 float toDegree(float radian)
 {
 	return 180.f / 3.141592653589793238462643383f * radian;

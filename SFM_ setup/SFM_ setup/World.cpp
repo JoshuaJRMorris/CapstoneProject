@@ -44,7 +44,7 @@ void World::update(sf::Time dt)
 
 	// Setup commands to destroy entities, and guide missiles
 	destroyEntitiesOutsideView();
-	guideMissiles();
+//	guideMissiles();
 
 	// Forward commands to scene graph, adapt velocity (scrolling, diagonal correction)
 	while (!mCommandQueue.isEmpty())
@@ -99,11 +99,11 @@ bool World::hasPlayerReachedEnd() const
 
 void World::loadTextures()
 {
-	mTextures.load(Textures::RedBird, "Media/Textures/RedBird.png");
+	mTextures.load(Textures::RedBird, "Media/Textures/RedBirdSolo.png");
 
 
 	mTextures.load(Textures::BackgroundForest, "Media/Textures/birdBack.png");
-	mTextures.load(Textures::Explosion, "Media/Textures/Explosion.png");
+	//mTextures.load(Textures::Explosion, "Media/Textures/Explosion.png");
 
 
 
