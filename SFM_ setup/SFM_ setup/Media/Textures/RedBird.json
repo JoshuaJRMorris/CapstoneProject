@@ -1,0 +1,44 @@
+{"frames": [
+
+{
+	"filename": "RedMoveLeft 1.png",
+	"frame": {"x":1,"y":1,"w":16,"h":15},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":16,"h":15},
+	"sourceSize": {"w":16,"h":16}
+},
+{
+	"filename": "RedMoveLeft 2.png",
+	"frame": {"x":19,"y":1,"w":16,"h":15},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":16,"h":15},
+	"sourceSize": {"w":16,"h":16}
+},
+{
+	"filename": "RedMoveRight 1.png",
+	"frame": {"x":37,"y":1,"w":16,"h":15},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":16,"h":15},
+	"sourceSize": {"w":16,"h":16}
+},
+{
+	"filename": "RedMoveRight 2.png",
+	"frame": {"x":55,"y":1,"w":16,"h":15},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":16,"h":15},
+	"sourceSize": {"w":16,"h":16}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "RedBird.png",
+	"format": "RGBA8888",
+	"size": {"w":72,"h":17},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:bce38f9664628c003e1d264ec30fa4eb:c2aee61b4fccb17156e90fb6bdcdbe67:be8bbaee9bad13ff5df2b5aef00527b4$"
+}
+}
