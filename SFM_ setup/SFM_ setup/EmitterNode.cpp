@@ -1,5 +1,5 @@
 #include "EmitterNode.h"
-
+#include "ParticleNode.h"
 #include "CommandQueue.h"
 #include "Command.h"
 

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\compiled finished game\SFM_ setup\SFM_ setup\</FILEPATH>
+      <FILENAME>DataTables.h</FILENAME>
+      <LINE>50</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'PickupData::texture' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>PickupData::{ctor}</FUNCTION>
+    <DECORATED>??0PickupData@@QAE@XZ</DECORATED>
+    <FUNCLINE>50</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>PickupData::texture</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\compiled finished game\SFM_ setup\SFM_ setup\</FILEPATH>
+      <FILENAME>DataTables.h</FILENAME>
+      <LINE>43</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'ProjectileData::texture' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>ProjectileData::{ctor}</FUNCTION>
+    <DECORATED>??0ProjectileData@@QAE@XZ</DECORATED>
+    <FUNCLINE>43</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>ProjectileData::texture</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\compiled finished game\SFM_ setup\SFM_ setup\</FILEPATH>
+      <FILENAME>DataTables.h</FILENAME>
+      <LINE>43</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'ProjectileData::speed' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>ProjectileData::{ctor}</FUNCTION>
+    <DECORATED>??0ProjectileData@@QAE@XZ</DECORATED>
+    <FUNCLINE>43</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>ProjectileData::speed</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\compiled finished game\SFM_ setup\SFM_ setup\</FILEPATH>
+      <FILENAME>DataTables.h</FILENAME>
+      <LINE>43</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'ProjectileData::damage' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>ProjectileData::{ctor}</FUNCTION>
+    <DECORATED>??0ProjectileData@@QAE@XZ</DECORATED>
+    <FUNCLINE>43</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>ProjectileData::damage</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\compiled finished game\SFM_ setup\SFM_ setup\</FILEPATH>
+      <FILENAME>DataTables.h</FILENAME>
+      <LINE>35</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'AircraftData::texture' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>AircraftData::{ctor}</FUNCTION>
+    <DECORATED>??0AircraftData@@QAE@XZ</DECORATED>
+    <FUNCLINE>35</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>AircraftData::texture</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\compiled finished game\SFM_ setup\SFM_ setup\</FILEPATH>
+      <FILENAME>DataTables.h</FILENAME>
+      <LINE>35</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'AircraftData::speed' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>AircraftData::{ctor}</FUNCTION>
+    <DECORATED>??0AircraftData@@QAE@XZ</DECORATED>
+    <FUNCLINE>35</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>AircraftData::speed</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\compiled finished game\SFM_ setup\SFM_ setup\</FILEPATH>
+      <FILENAME>DataTables.h</FILENAME>
+      <LINE>35</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'AircraftData::hitpoints' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>AircraftData::{ctor}</FUNCTION>
+    <DECORATED>??0AircraftData@@QAE@XZ</DECORATED>
+    <FUNCLINE>35</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>AircraftData::hitpoints</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\compiled finished game\SFM_ setup\SFM_ setup\</FILEPATH>
+      <FILENAME>DataTables.h</FILENAME>
+      <LINE>35</LINE>
+      <COLUMN>0</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'AircraftData::hasRollAnimation' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>AircraftData::{ctor}</FUNCTION>
+    <DECORATED>??0AircraftData@@QAE@XZ</DECORATED>
+    <FUNCLINE>35</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>AircraftData::hasRollAnimation</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>

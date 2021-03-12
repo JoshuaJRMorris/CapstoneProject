@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\compiled finished game\SFM_ setup\SFM_ setup\</FILEPATH>
+      <FILENAME>Aircraft.cpp</FILENAME>
+      <LINE>22</LINE>
+      <COLUMN>10</COLUMN>
+    </SFA>
+    <DEFECTCODE>26812</DEFECTCODE>
+    <DESCRIPTION>The enum type 'Aircraft::Type' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
+    <FUNCTION>Aircraft::{ctor}</FUNCTION>
+    <DECORATED>??0Aircraft@@QAE@W4Type@0@ABV?$ResourceHolder@VTexture@sf@@W4ID@Textures@@@@ABV?$ResourceHolder@VFont@sf@@W4ID@Fonts@@@@@Z</DECORATED>
+    <FUNCLINE>22</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\compiled finished game\SFM_ setup\SFM_ setup\</FILEPATH>
+      <FILENAME>Aircraft.cpp</FILENAME>
+      <LINE>107</LINE>
+      <COLUMN>19</COLUMN>
+    </SFA>
+    <DEFECTCODE>26812</DEFECTCODE>
+    <DESCRIPTION>The enum type 'SoundEffect::ID' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
+    <FUNCTION>Aircraft::updateCurrent</FUNCTION>
+    <DECORATED>?updateCurrent@Aircraft@@EAEXVTime@sf@@AAVCommandQueue@@@Z</DECORATED>
+    <FUNCLINE>92</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\compiled finished game\SFM_ setup\SFM_ setup\</FILEPATH>
+      <FILENAME>Aircraft.cpp</FILENAME>
+      <LINE>272</LINE>
+      <COLUMN>18</COLUMN>
+    </SFA>
+    <DEFECTCODE>26812</DEFECTCODE>
+    <DESCRIPTION>The enum type 'Projectile::Type' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
+    <FUNCTION>Aircraft::createBullets</FUNCTION>
+    <DECORATED>?createBullets@Aircraft@@ABEXAAVSceneNode@@ABV?$ResourceHolder@VTexture@sf@@W4ID@Textures@@@@@Z</DECORATED>
+    <FUNCLINE>270</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\compiled finished game\SFM_ setup\SFM_ setup\</FILEPATH>
+      <FILENAME>Aircraft.cpp</FILENAME>
+      <LINE>308</LINE>
+      <COLUMN>6</COLUMN>
+    </SFA>
+    <DEFECTCODE>26812</DEFECTCODE>
+    <DESCRIPTION>The enum type 'Pickup::Type' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
+    <FUNCTION>Aircraft::createPickup</FUNCTION>
+    <DECORATED>?createPickup@Aircraft@@ABEXAAVSceneNode@@ABV?$ResourceHolder@VTexture@sf@@W4ID@Textures@@@@@Z</DECORATED>
+    <FUNCLINE>306</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Jacob\School\Nbcc\Year 2\Term 1\Game Development in C++\compiled finished game\SFM_ setup\SFM_ setup\</FILEPATH>
+      <FILENAME>ResourceHolder.h</FILENAME>
+      <LINE>64</LINE>
+      <COLUMN>54</COLUMN>
+    </SFA>
+    <DEFECTCODE>26812</DEFECTCODE>
+    <DESCRIPTION>The enum type 'Textures::ID' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
+    <FUNCTION>ResourceHolder&lt;sf::Texture,enum Textures::ID&gt;::get</FUNCTION>
+    <DECORATED>?get@?$ResourceHolder@VTexture@sf@@W4ID@Textures@@@@QBEABVTexture@sf@@W4ID@Textures@@@Z</DECORATED>
+    <FUNCLINE>64</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>

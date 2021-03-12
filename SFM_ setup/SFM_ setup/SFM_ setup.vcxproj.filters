@@ -84,12 +84,16 @@
     <ClCompile Include="DataTables.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EmitterNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="GameOverState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MusicPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
     <ClCompile Include="ParticleNode.cpp">
@@ -99,6 +103,11 @@
       <Filter>Source Files</Filter>
     </ClCompile>
 >>>>>>> parent of e6d7044 (before remove particle)
+=======
+    <ClCompile Include="ParticleNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+>>>>>>> parent of 5e3a515 (after particle remove)
     <ClCompile Include="PostEffect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -197,6 +206,9 @@
     <ClInclude Include="DataTables.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="EmitterNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="GameOverState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -204,8 +216,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     <ClInclude Include="Particle.h">
+=======
+    <ClInclude Include="Particle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PostEffect.h">
+>>>>>>> parent of 5e3a515 (after particle remove)
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ParticleNode.h">
