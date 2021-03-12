@@ -1,7 +1,7 @@
 #pragma once
 #include "CommandQueue.h"
 #include "SceneNode.h"
-#include "Particle.h"
+
 
 
 class ParticleNode;
