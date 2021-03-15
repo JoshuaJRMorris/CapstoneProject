@@ -101,6 +101,7 @@ void World::loadTextures()
 {
 	mTextures.load(Textures::RedBird, "Media/Textures/Birds.png");
 	mTextures.load(Textures::BlueBird, "Media/Textures/Birds.png");
+	mTextures.load(Textures::Explosion, "Media/Textures/Birds.png");
 
 
 	mTextures.load(Textures::BackgroundForest, "Media/Textures/birdBack.png");
@@ -167,10 +168,20 @@ void World::handleCollisions()
 		for (auto pair : collisionPairs)
 		{
 			if (matchesCategories(pair, Category::PlayerCharacter, Category::EnemyCharacter)) {
+				
 				auto& player = static_cast<Actor&>(*pair.first);
 				auto& enemy = static_cast<Actor&>(*pair.second);
 
-				player.setState(Actor::State::Dead);
+				if (player.getState() == Actor::State::Attack) {
+					enemy.setState(Actor::State::Dead);
+					mSounds.play(SoundEffect::Explosion2);
+					//enemy.remove();
+					
+					
+				}
+				enemy.accelerate(sf::Vector2f(-10, 0.f));
+				
+				//player.setState(Actor::State::Fly);
 
 			}
 

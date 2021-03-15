@@ -29,6 +29,7 @@ Actor::Actor(Type type, const TextureHolder& textures, const FontHolder& fonts)
 	, mTravelledDistance(0.f)
 	, direction_(Direction::Up)
 	, mDirectionIndex(0)
+	, attack_(false)
 {
 	for (auto a : TABLE.at(type).animations)
 	{
@@ -62,8 +63,18 @@ void Actor::updateStates()
 	if (isDestroyed())
 		state_ = Actor::State::Dead;
 
-	
+	if (state_ == Actor::State::Attack && animations_[state_].isFinished())
 		state_ = Actor::State::Fly;
+
+	if (attack_ && state_ != Actor::State::Attack) {
+		state_ = Actor::State::Attack;
+		animations_[state_].restart();
+		attack_ = false;
+	}
+
+	if (state_ == Actor::State::Idle && length(getVelocity()) > 0.1f)
+		state_ = Actor::State::Fly;
+		
 }
 
 void Actor::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
@@ -91,9 +102,10 @@ void Actor::updateCurrent(sf::Time dt, CommandQueue& commands)
 
 	mSprite.setTextureRect(rec);
 	centerOrigin(mSprite);
+
 	if (state_ != State::Dead)
 		Entity::updateCurrent(dt, commands);
-
+	
 	updateMovementPattern(dt);
 }
 
@@ -121,6 +133,11 @@ sf::FloatRect Actor::getBoundingRect() const
 bool Actor::isMarkedForRemoval() const
 {
 	return isDestroyed();
+}
+
+void Actor::attack()
+{
+	attack_ = true;
 }
 
 void Actor::remove()
@@ -172,22 +189,17 @@ void Actor::updateMovementPattern(sf::Time dt)
 {
 	// Enemy: Movement pattern
 	auto directions = TABLE.at(mType).directions;
-	if (!directions.empty())
-	{
+
+	if (!directions.empty()) {
 		if (mTravelledDistance > (directions[mDirectionIndex].distance))
 		{
 			mDirectionIndex = (++mDirectionIndex) % directions.size();
 			mTravelledDistance = 0;
 		}
-		if (direction_ == Actor::Direction::Left && mType != Actor::Type::RedBird)
-		{
-			directions[mDirectionIndex].angle *= -1;
-		}
+
 		float radians = toRadian(directions[mDirectionIndex].angle + 90.f);
-		float vx;
-		float vy;
-		vx = getMaxSpeed() * std::cos(radians);
-		vy = getMaxSpeed() * std::sin(radians);
+		float vx = getMaxSpeed() * std::cos(radians);
+		float vy = getMaxSpeed() * std::sin(radians);
 
 		setVelocity(vx, vy);
 		mTravelledDistance += getMaxSpeed() * dt.asSeconds();

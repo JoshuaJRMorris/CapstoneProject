@@ -19,8 +19,10 @@ namespace Textures
 
 
 
+
 		RedBird,
 		BlueBird,
+		Explosion,
 
 	};
 }

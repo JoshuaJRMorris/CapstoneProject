@@ -16,7 +16,7 @@ MenuState::MenuState(StateStack& stack, Context context)
 	mBackgroundSprite.setTexture(texture);
 
 	auto playButton = std::make_shared<GUI::Button>(context);
-	playButton->setPosition(100, 300);
+	playButton->setPosition(150, 300);
 	playButton->setText("FIGHT");
 	playButton->setCallback([this]()
 		{
@@ -33,7 +33,7 @@ MenuState::MenuState(StateStack& stack, Context context)
 	//	});
 
 	auto exitButton = std::make_shared<GUI::Button>(context);
-	exitButton->setPosition(100, 400);
+	exitButton->setPosition(150, 350);
 	exitButton->setText("CHICKEN OUT");
 	exitButton->setCallback([this]()
 		{

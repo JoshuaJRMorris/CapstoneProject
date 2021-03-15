@@ -32,6 +32,7 @@ Player::Player()
 	mKeyBinding[sf::Keyboard::Right] = MoveRight;
 	mKeyBinding[sf::Keyboard::Up] = MoveUp;
 	mKeyBinding[sf::Keyboard::Down] = MoveDown;
+	mKeyBinding[sf::Keyboard::Q] = Attack1;
 
 	// Set initial action bindings
 	initializeActions();
@@ -142,6 +143,7 @@ void Player::initializeActions()
 			a.accelerate(sf::Vector2f(0.f, playerSpeed));
 		}
 	);
+	mActionBinding[Attack1].action = derivedAction<Actor>([](Actor& a, sf::Time) {a.attack();});
 
 }
 
@@ -153,6 +155,7 @@ bool Player::isRealtimeAction(Action action)
 	case MoveRight:
 	case MoveDown:
 	case MoveUp:
+	case Attack1:
 		return true;
 
 	default:

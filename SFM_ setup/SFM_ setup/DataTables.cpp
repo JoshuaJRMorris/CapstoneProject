@@ -17,13 +17,21 @@ std::map<Actor::Type, ActorData> initializeActorData()
 	data[Actor::Type::RedBird].speed = 400;
 	JsonFrameParser frames = JsonFrameParser("Media/Textures/Birds.json");
 
-	data[Actor::Type::RedBird].animations[Actor::State::Idle].addFrameSet(frames.getFramesFor("Red"));
+	data[Actor::Type::RedBird].animations[Actor::State::Idle].addFrameSet(frames.getFramesFor("RedFlap"));
 	data[Actor::Type::RedBird].animations[Actor::State::Idle].setDuration(sf::seconds(0.2f));
 	data[Actor::Type::RedBird].animations[Actor::State::Idle].setRepeating(true);
 
-	data[Actor::Type::RedBird].animations[Actor::State::Fly].addFrameSet(frames.getFramesFor("Red"));
+	data[Actor::Type::RedBird].animations[Actor::State::Fly].addFrameSet(frames.getFramesFor("RedFlap"));
 	data[Actor::Type::RedBird].animations[Actor::State::Fly].setDuration(sf::seconds(0.2f));
 	data[Actor::Type::RedBird].animations[Actor::State::Fly].setRepeating(true);
+
+	data[Actor::Type::RedBird].animations[Actor::State::Attack].addFrameSet(frames.getFramesFor("RedBirdAttack1"));
+	data[Actor::Type::RedBird].animations[Actor::State::Attack].setDuration(sf::seconds(1.f));
+	data[Actor::Type::RedBird].animations[Actor::State::Attack].setRepeating(false);
+
+	data[Actor::Type::RedBird].animations[Actor::State::Dead].addFrameSet(frames.getFramesFor("RedFlap"));
+	data[Actor::Type::RedBird].animations[Actor::State::Dead].setDuration(sf::seconds(1.f));
+	data[Actor::Type::RedBird].animations[Actor::State::Dead].setRepeating(false);
 
 	data[Actor::Type::BlueBird].texture = Textures::ID::BlueBird;
 	data[Actor::Type::BlueBird].speed = 400;
@@ -36,9 +44,10 @@ std::map<Actor::Type, ActorData> initializeActorData()
 	data[Actor::Type::BlueBird].animations[Actor::State::Fly].setDuration(sf::seconds(0.2f));
 	data[Actor::Type::BlueBird].animations[Actor::State::Fly].setRepeating(true);
 
-	//data[Actor::Type::RedBird].animations[Actor::State::MoveRight].addFrameSet(frames.getFramesFor("RedMoveRight "));
-	//data[Actor::Type::RedBird].animations[Actor::State::MoveRight].setDuration(sf::seconds(1.f));
-	//data[Actor::Type::RedBird].animations[Actor::State::MoveRight].setRepeating(true);
+	data[Actor::Type::BlueBird].animations[Actor::State::Dead].addFrameSet(frames.getFramesFor("Explosion"));
+	data[Actor::Type::BlueBird].animations[Actor::State::Dead].setDuration(sf::seconds(1.f));
+	data[Actor::Type::BlueBird].animations[Actor::State::Dead].setRepeating(false);
+
 
 
 	return data;

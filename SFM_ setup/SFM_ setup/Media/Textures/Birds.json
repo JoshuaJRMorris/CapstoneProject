@@ -2,7 +2,7 @@
 
 {
 	"filename": "Blue 1.png",
-	"frame": {"x":1,"y":1,"w":16,"h":15},
+	"frame": {"x":1,"y":426,"w":16,"h":15},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":1,"w":16,"h":15},
@@ -10,23 +10,135 @@
 },
 {
 	"filename": "Blue 2.png",
-	"frame": {"x":19,"y":1,"w":16,"h":15},
+	"frame": {"x":244,"y":398,"w":16,"h":15},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":1,"w":16,"h":15},
 	"sourceSize": {"w":16,"h":16}
 },
 {
-	"filename": "Red 1.png",
-	"frame": {"x":37,"y":1,"w":16,"h":15},
+	"filename": "Explosion 1.png",
+	"frame": {"x":1,"y":1,"w":241,"h":224},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":241,"h":224},
+	"sourceSize": {"w":241,"h":224}
+},
+{
+	"filename": "Explosion 2.png",
+	"frame": {"x":1,"y":227,"w":241,"h":197},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":241,"h":197},
+	"sourceSize": {"w":241,"h":224}
+},
+{
+	"filename": "Explosion 3.png",
+	"frame": {"x":244,"y":1,"w":212,"h":196},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":14,"y":0,"w":212,"h":196},
+	"sourceSize": {"w":241,"h":224}
+},
+{
+	"filename": "Explosion 4.png",
+	"frame": {"x":244,"y":199,"w":211,"h":197},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":15,"y":0,"w":211,"h":197},
+	"sourceSize": {"w":241,"h":224}
+},
+{
+	"filename": "Explosion 5.png",
+	"frame": {"x":458,"y":1,"w":195,"h":167},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":13,"y":15,"w":195,"h":167},
+	"sourceSize": {"w":241,"h":224}
+},
+{
+	"filename": "Explosion 6.png",
+	"frame": {"x":655,"y":169,"w":195,"h":164},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":24,"y":23,"w":195,"h":164},
+	"sourceSize": {"w":241,"h":224}
+},
+{
+	"filename": "Explosion 7.png",
+	"frame": {"x":458,"y":170,"w":195,"h":162},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":23,"y":23,"w":195,"h":162},
+	"sourceSize": {"w":241,"h":224}
+},
+{
+	"filename": "Explosion 8.png",
+	"frame": {"x":852,"y":1,"w":195,"h":166},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":23,"y":23,"w":195,"h":166},
+	"sourceSize": {"w":241,"h":224}
+},
+{
+	"filename": "Explosion 9.png",
+	"frame": {"x":852,"y":198,"w":195,"h":166},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":15,"y":23,"w":195,"h":166},
+	"sourceSize": {"w":241,"h":224}
+},
+{
+	"filename": "Explosion 10.png",
+	"frame": {"x":652,"y":335,"w":189,"h":164},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":28,"y":20,"w":189,"h":164},
+	"sourceSize": {"w":241,"h":224}
+},
+{
+	"filename": "Explosion 11.png",
+	"frame": {"x":655,"y":1,"w":195,"h":166},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":23,"y":25,"w":195,"h":166},
+	"sourceSize": {"w":241,"h":224}
+},
+{
+	"filename": "Explosion 12.png",
+	"frame": {"x":457,"y":334,"w":193,"h":166},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":25,"y":23,"w":193,"h":166},
+	"sourceSize": {"w":241,"h":224}
+},
+{
+	"filename": "RedBirdAttack1 1.png",
+	"frame": {"x":1,"y":443,"w":16,"h":15},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":1,"w":16,"h":15},
 	"sourceSize": {"w":16,"h":16}
 },
 {
-	"filename": "Red 2.png",
-	"frame": {"x":55,"y":1,"w":16,"h":15},
+	"filename": "RedBirdAttack1 2.png",
+	"frame": {"x":19,"y":426,"w":16,"h":15},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":16,"h":15},
+	"sourceSize": {"w":16,"h":16}
+},
+{
+	"filename": "RedFlap 1.png",
+	"frame": {"x":1,"y":443,"w":16,"h":15},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":16,"h":15},
+	"sourceSize": {"w":16,"h":16}
+},
+{
+	"filename": "RedFlap 2.png",
+	"frame": {"x":262,"y":398,"w":16,"h":15},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":1,"w":16,"h":15},
@@ -35,10 +147,10 @@
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
-	"image": "RedBird.png",
+	"image": "Birds.png",
 	"format": "RGBA8888",
-	"size": {"w":72,"h":17},
+	"size": {"w":1019,"h":501},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:0439ee4a5281c7611110fe65eac08293:0192436e590630b428a52de7457fa465:be8bbaee9bad13ff5df2b5aef00527b4$"
+	"smartupdate": "$TexturePacker:SmartUpdate:c1990c2b631477b4a02b75360ebe24d1:9f5cdb1b0f37a8cea37e2293dd2d08b1:3dd6e3c51120e814e0cce32a3c41f742$"
 }
 }

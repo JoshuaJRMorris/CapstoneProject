@@ -18,8 +18,8 @@ public:
 		MoveRight,
 		MoveUp,
 		MoveDown,
-		Fire,
-		LaunchMissile,
+		Attack1,
+		
 		ActionCount
 	};
 

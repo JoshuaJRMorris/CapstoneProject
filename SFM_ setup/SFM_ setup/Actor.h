@@ -19,7 +19,7 @@ public:
 		TypeCount
 	};
 	enum class State {
-		Dead, Idle, Fly
+		Dead, Idle, Fly, Attack
 	};
 	enum class Direction
 	{
@@ -34,6 +34,7 @@ public:
 	virtual sf::FloatRect	getBoundingRect() const;
 	virtual void			remove();
 	virtual bool 			isMarkedForRemoval() const;
+	void					attack();
 
 	float					getMaxSpeed() const;
 
@@ -67,4 +68,5 @@ private:
 	TextNode* mHealthDisplay;
 	float							mTravelledDistance;
 	std::size_t						mDirectionIndex;
+	bool								attack_;
 };
