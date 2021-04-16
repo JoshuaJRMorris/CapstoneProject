@@ -11,6 +11,7 @@
 
 #include <cmath>
 #include <random>
+//#include "SceneNode.cpp"
 
 
 using namespace std::placeholders;
@@ -23,12 +24,17 @@ namespace
 }
 
 Actor::Actor(Type type, const TextureHolder& textures, const FontHolder& fonts)
-	: Entity(100)
+	: Entity(TABLE.at(type).hitPoints)
 	, mType(type)
 	, mSprite(textures.get(TABLE.at(type).texture))
+	, mExplosion(textures.get(Textures::Explosion))
 	, mTravelledDistance(0.f)
 	, direction_(Direction::Up)
+	, mShowExplosion(true)
+	, mPlayedExplosionSound(false)
+	, mTargetDirection()
 	, mDirectionIndex(0)
+	, mHealthDisplay(nullptr)
 	, attack_(false)
 {
 	for (auto a : TABLE.at(type).animations)
@@ -52,9 +58,17 @@ Actor::Actor(Type type, const TextureHolder& textures, const FontHolder& fonts)
 		break;
 	}
 
+	std::unique_ptr<TextNode> healthDisplay(new TextNode(fonts, ""));
+	mHealthDisplay = healthDisplay.get();
+	attachChild(std::move(healthDisplay));
+
+	mExplosion.setFrameSize(sf::Vector2i(256, 256));
+	mExplosion.setNumFrames(16);
+	mExplosion.setDuration(sf::seconds(1));
+
 	mSprite.setTextureRect(sf::IntRect());
 	centerOrigin(mSprite);
-
+	updateTexts();
 
 }
 
@@ -80,13 +94,32 @@ void Actor::updateStates()
 void Actor::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
 {
 
-	target.draw(mSprite, states);
+	if (isDestroyed() && mShowExplosion)
+		target.draw(mExplosion, states);
+	else
+		target.draw(mSprite, states);
 }
 
 void Actor::updateCurrent(sf::Time dt, CommandQueue& commands)
 {
+	updateTexts();
 	updateStates();
 
+	if (isDestroyed())
+	{
+		
+		mExplosion.update(dt);
+
+		// Play explosion sound only once
+		if (!mPlayedExplosionSound)
+		{
+			SoundEffect::ID soundEffect = (randomInt(2) == 0) ? SoundEffect::Explosion1 : SoundEffect::Explosion2;
+			playLocalSound(commands, soundEffect);
+
+			mPlayedExplosionSound = true;
+		}
+		return;
+	}
 	auto rec = animations_.at(state_).update(dt);
 
 	if (state_ != State::Dead) {
@@ -106,7 +139,7 @@ void Actor::updateCurrent(sf::Time dt, CommandQueue& commands)
 	if (state_ != State::Dead)
 		Entity::updateCurrent(dt, commands);
 	
-	updateMovementPattern(dt);
+	//updateMovementPattern(dt);
 }
 
 unsigned int Actor::getCategory() const
@@ -139,6 +172,8 @@ void Actor::attack()
 {
 	attack_ = true;
 }
+
+
 
 void Actor::remove()
 {
@@ -185,25 +220,48 @@ void Actor::playLocalSound(CommandQueue& commands, SoundEffect::ID effect)
 	commands.push(command);
 }
 
+
+
 void Actor::updateMovementPattern(sf::Time dt)
 {
-	// Enemy: Movement pattern
-	auto directions = TABLE.at(mType).directions;
+	switch (mType) {
+	case Type::BlueBird:
+		setVelocity(10.f, 10.f);
+		const float approachRate = 200.f;
 
-	if (!directions.empty()) {
-		if (mTravelledDistance > (directions[mDirectionIndex].distance))
-		{
-			mDirectionIndex = (++mDirectionIndex) % directions.size();
-			mTravelledDistance = 0;
-		}
+		sf::Vector2f newVelocity = unitVector(approachRate * dt.asSeconds() * mTargetDirection + getVelocity());
+		newVelocity *= getMaxSpeed();
+		float angle = std::atan2(newVelocity.y, newVelocity.x);
 
-		float radians = toRadian(directions[mDirectionIndex].angle + 90.f);
-		float vx = getMaxSpeed() * std::cos(radians);
-		float vy = getMaxSpeed() * std::sin(radians);
+		setVelocity(newVelocity);
 
-		setVelocity(vx, vy);
 		mTravelledDistance += getMaxSpeed() * dt.asSeconds();
+
+		// Enemy: Movement pattern
+		auto directions = TABLE.at(mType).directions;
+
+		//if (!directions.empty()) {
+		//	if (mTravelledDistance > (directions[mDirectionIndex].distance))
+		//	{
+		//		mDirectionIndex = (++mDirectionIndex) % directions.size();
+		//		mTravelledDistance = 0;
+		//	}
+
+		//	float radians = toRadian(directions[mDirectionIndex].angle + 90.f);
+		//	float vx = getMaxSpeed() * std::cos(radians);
+		//	float vy = getMaxSpeed() * std::sin(radians);
+
+		//	setVelocity(vx, vy);
+		//	mTravelledDistance += getMaxSpeed() * dt.asSeconds();
+		//}
+		//	break;
+		//}
 	}
+}
+
+void Actor::guideTowards(sf::Vector2f position)
+{
+	mTargetDirection = unitVector(position - getWorldPosition());
 }
 
 void Actor::updateTexts()

@@ -13,9 +13,12 @@ std::map<Actor::Type, ActorData> initializeActorData()
 {
 
 	std::map<Actor::Type, ActorData> data;
+	JsonFrameParser frames = JsonFrameParser("Media/Textures/Birds.json");
+
 	data[Actor::Type::RedBird].texture = Textures::ID::RedBird;
 	data[Actor::Type::RedBird].speed = 400;
-	JsonFrameParser frames = JsonFrameParser("Media/Textures/Birds.json");
+	//data[Actor::Type::RedBird].damageDone = 10;
+	data[Actor::Type::RedBird].hitPoints = 100;
 
 	data[Actor::Type::RedBird].animations[Actor::State::Idle].addFrameSet(frames.getFramesFor("RedFlap"));
 	data[Actor::Type::RedBird].animations[Actor::State::Idle].setDuration(sf::seconds(0.2f));
@@ -26,15 +29,20 @@ std::map<Actor::Type, ActorData> initializeActorData()
 	data[Actor::Type::RedBird].animations[Actor::State::Fly].setRepeating(true);
 
 	data[Actor::Type::RedBird].animations[Actor::State::Attack].addFrameSet(frames.getFramesFor("RedBirdAttack1"));
-	data[Actor::Type::RedBird].animations[Actor::State::Attack].setDuration(sf::seconds(1.f));
+	data[Actor::Type::RedBird].animations[Actor::State::Attack].setDuration(sf::seconds(0.5f));
 	data[Actor::Type::RedBird].animations[Actor::State::Attack].setRepeating(false);
 
 	data[Actor::Type::RedBird].animations[Actor::State::Dead].addFrameSet(frames.getFramesFor("RedFlap"));
 	data[Actor::Type::RedBird].animations[Actor::State::Dead].setDuration(sf::seconds(1.f));
 	data[Actor::Type::RedBird].animations[Actor::State::Dead].setRepeating(false);
 
+
 	data[Actor::Type::BlueBird].texture = Textures::ID::BlueBird;
-	data[Actor::Type::BlueBird].speed = 400;
+	data[Actor::Type::BlueBird].speed = 40;
+	data[Actor::Type::BlueBird].hitPoints = 200;
+	data[Actor::Type::BlueBird].directions.emplace_back(Direction(45.f, 50.f));
+	data[Actor::Type::BlueBird].directions.emplace_back(Direction(135.f, 50.f));
+
 
 	data[Actor::Type::BlueBird].animations[Actor::State::Idle].addFrameSet(frames.getFramesFor("Blue"));
 	data[Actor::Type::BlueBird].animations[Actor::State::Idle].setDuration(sf::seconds(0.2f));

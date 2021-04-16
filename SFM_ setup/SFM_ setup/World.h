@@ -92,7 +92,7 @@ private:
 	sf::FloatRect						mWorldBounds;
 	sf::Vector2f						mSpawnPosition;
 	float								mScrollSpeed;
-	Actor* mPlayerAircraft;
+	Actor* mPlayerCharacter;
 
 	std::vector<SpawnPoint>				mEnemySpawnPoints;
 	std::vector<Actor*>				mActiveEnemies;

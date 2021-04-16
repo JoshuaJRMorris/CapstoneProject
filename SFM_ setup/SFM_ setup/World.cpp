@@ -23,7 +23,7 @@ World::World(sf::RenderTarget& outputTarget, FontHolder& fonts, SoundPlayer& sou
 	, mWorldBounds(0.f, 0.f, mWorldView.getSize().x, 5000.f)
 	, mSpawnPosition(mWorldView.getSize().x / 2.f, mWorldBounds.height - mWorldView.getSize().y / 2.f)
 	//, mScrollSpeed(-50.f)
-	, mPlayerAircraft(nullptr)
+	, mPlayerCharacter(nullptr)
 	, mEnemySpawnPoints()
 	, mActiveEnemies()
 {
@@ -40,7 +40,7 @@ void World::update(sf::Time dt)
 {
 	// Scroll the world, reset player velocity
 	//mWorldView.move(0.f, mScrollSpeed * dt.asSeconds());
-	mPlayerAircraft->setVelocity(0.f, 0.f);
+	mPlayerCharacter->setVelocity(0.f, 0.f);
 
 	// Setup commands to destroy entities, and guide missiles
 	destroyEntitiesOutsideView();
@@ -89,19 +89,19 @@ CommandQueue& World::getCommandQueue()
 
 bool World::hasAlivePlayer() const
 {
-	return !mPlayerAircraft->isMarkedForRemoval();
+	return !mPlayerCharacter->isMarkedForRemoval();
 }
 
 bool World::hasPlayerReachedEnd() const
 {
-	return !mWorldBounds.contains(mPlayerAircraft->getPosition());
+	return !mWorldBounds.contains(mPlayerCharacter->getPosition());
 }
 
 void World::loadTextures()
 {
 	mTextures.load(Textures::RedBird, "Media/Textures/Birds.png");
 	mTextures.load(Textures::BlueBird, "Media/Textures/Birds.png");
-	mTextures.load(Textures::Explosion, "Media/Textures/Birds.png");
+	mTextures.load(Textures::Explosion, "Media/Textures/Explosion.png");
 
 
 	mTextures.load(Textures::BackgroundForest, "Media/Textures/birdBack.png");
@@ -117,24 +117,24 @@ void World::adaptPlayerPosition()
 	sf::FloatRect viewBounds = getViewBounds();
 	const float borderDistance = 40.f;
 
-	sf::Vector2f position = mPlayerAircraft->getPosition();
+	sf::Vector2f position = mPlayerCharacter->getPosition();
 	position.x = std::max(position.x, viewBounds.left + borderDistance);
 	position.x = std::min(position.x, viewBounds.left + viewBounds.width - borderDistance);
 	position.y = std::max(position.y, viewBounds.top + borderDistance);
 	position.y = std::min(position.y, viewBounds.top + viewBounds.height - borderDistance);
-	mPlayerAircraft->setPosition(position);
+	mPlayerCharacter->setPosition(position);
 }
 
 void World::adaptPlayerVelocity()
 {
-	sf::Vector2f velocity = mPlayerAircraft->getVelocity();
+	sf::Vector2f velocity = mPlayerCharacter->getVelocity();
 
 	// If moving diagonally, reduce velocity (to have always same velocity)
 	if (velocity.x != 0.f && velocity.y != 0.f)
-		mPlayerAircraft->setVelocity(velocity / std::sqrt(2.f));
+		mPlayerCharacter->setVelocity(velocity / std::sqrt(2.f));
 
 	// Add scrolling velocity
-	mPlayerAircraft->accelerate(0.f, mScrollSpeed);
+	mPlayerCharacter->accelerate(0.f, mScrollSpeed);
 }
 
 bool matchesCategories(SceneNode::Pair& colliders, Category::Type type1, Category::Type type2)
@@ -173,13 +173,14 @@ void World::handleCollisions()
 				auto& enemy = static_cast<Actor&>(*pair.second);
 
 				if (player.getState() == Actor::State::Attack) {
-					enemy.setState(Actor::State::Dead);
-					mSounds.play(SoundEffect::Explosion2);
-					//enemy.remove();
+					enemy.damage(1);
+					//enemy.destroy();
+					//enemy.setState(Actor::State::Dead);
 					
+					break;
 					
 				}
-				enemy.accelerate(sf::Vector2f(-10, 0.f));
+				//enemy.accelerate(sf::Vector2f(-10, 0.f));
 				
 				//player.setState(Actor::State::Fly);
 
@@ -193,7 +194,7 @@ void World::handleCollisions()
 void World::updateSounds()
 {
 	// Set listener's position to player position
-	mSounds.setListenerPosition(mPlayerAircraft->getWorldPosition());
+	mSounds.setListenerPosition(mPlayerCharacter->getWorldPosition());
 
 	// Remove unused sounds
 	mSounds.removeStoppedSounds();
@@ -240,8 +241,8 @@ void World::buildScene()
 
 	// Add player's character
 	std::unique_ptr<Actor> player(new Actor(Actor::Type::RedBird, mTextures, mFonts));
-	mPlayerAircraft = player.get();
-	mPlayerAircraft->setPosition(mSpawnPosition);
+	mPlayerCharacter = player.get();
+	mPlayerCharacter->setPosition(mSpawnPosition);
 	//mPlayerAircraft->setScale(5, 5);
 	mSceneLayers[UpperAir]->attachChild(std::move(player));
 
@@ -317,15 +318,14 @@ void World::spawnEnemies()
 
 void World::destroyEntitiesOutsideView()
 {
-	//Command command;
-	//command.category = Category::Projectile | Category::EnemyAircraft;
-	//command.action = derivedAction<Entity>([this](Entity& e, sf::Time)
-	//	{
-	//		if (!getBattlefieldBounds().intersects(e.getBoundingRect()))
-	//			e.remove();
-	//	});
+	Command command;
+	command.action = derivedAction<Entity>([this](Entity& e, sf::Time)
+		{
+			if (!getBattlefieldBounds().intersects(e.getBoundingRect()))
+				e.remove();
+		});
 
-	//mCommandQueue.push(command);
+	mCommandQueue.push(command);
 }
 
 void World::guideMissiles()

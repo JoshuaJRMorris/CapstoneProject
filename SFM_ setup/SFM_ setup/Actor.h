@@ -3,6 +3,7 @@
 #include "ResourceHolder.h"
 #include "ResourceIdentifiers.h"
 #include "Animation2.h"
+#include "Animation.h"
 #include "TextNode.h"
 #include <SFML/Graphics/Sprite.hpp>
 
@@ -36,6 +37,8 @@ public:
 	virtual bool 			isMarkedForRemoval() const;
 	void					attack();
 
+	void guideTowards(sf::Vector2f position);
+
 	float					getMaxSpeed() const;
 
 	void                                setState(State state);
@@ -62,8 +65,14 @@ private:
 	Type							mType;
 	State							state_;
 	sf::Sprite						mSprite;
+	Animation						mExplosion;
 	std::map<State, Animation2>		animations_;
 	Direction						direction_;
+	bool 					mShowExplosion;
+	bool					mPlayedExplosionSound;
+
+	sf::Vector2f			mTargetDirection;
+	std::vector<Actor*>				mActiveEnemies;
 
 	TextNode* mHealthDisplay;
 	float							mTravelledDistance;
