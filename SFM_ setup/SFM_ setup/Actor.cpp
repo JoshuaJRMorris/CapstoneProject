@@ -68,6 +68,7 @@ Actor::Actor(Type type, const TextureHolder& textures, const FontHolder& fonts)
 
 	mSprite.setTextureRect(sf::IntRect());
 	centerOrigin(mSprite);
+	centerOrigin(mExplosion);
 	updateTexts();
 
 }
@@ -165,7 +166,7 @@ sf::FloatRect Actor::getBoundingRect() const
 
 bool Actor::isMarkedForRemoval() const
 {
-	return isDestroyed();
+	return isDestroyed() && (mExplosion.isFinished() || !mShowExplosion);
 }
 
 void Actor::attack()
@@ -178,6 +179,7 @@ void Actor::attack()
 void Actor::remove()
 {
 	Entity::remove();
+	mShowExplosion = false;
 }
 
 void Actor::setDirection(Direction tmp_Direction)
