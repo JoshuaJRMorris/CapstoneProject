@@ -99,8 +99,8 @@ bool World::hasPlayerReachedEnd() const
 
 void World::loadTextures()
 {
-	mTextures.load(Textures::RedBird, "Media/Textures/Birds.png");
-	mTextures.load(Textures::BlueBird, "Media/Textures/Birds.png");
+	mTextures.load(Textures::RedBird, "Media/Textures/UpdatedBirds.png");
+	mTextures.load(Textures::BlueBird, "Media/Textures/UpdatedBirds.png");
 	mTextures.load(Textures::Explosion, "Media/Textures/Explosion.png");
 
 
@@ -123,6 +123,7 @@ void World::adaptPlayerPosition()
 	position.y = std::max(position.y, viewBounds.top + borderDistance);
 	position.y = std::min(position.y, viewBounds.top + viewBounds.height - borderDistance);
 	mPlayerCharacter->setPosition(position);
+	
 }
 
 void World::adaptPlayerVelocity()
@@ -306,7 +307,7 @@ void World::spawnEnemies()
 
 		std::unique_ptr<Actor> enemy(new Actor(spawn.type, mTextures, mFonts));
 		enemy->setPosition(spawn.x, spawn.y);
-		enemy->setScale(5, 5);
+		//enemy->setScale(5, 5);
 		//enemy->setRotation(180.f);
 
 		mSceneLayers[UpperAir]->attachChild(std::move(enemy));

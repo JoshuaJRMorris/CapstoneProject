@@ -32,6 +32,11 @@ Actor::Actor(Type type, const TextureHolder& textures, const FontHolder& fonts)
 	, direction_(Direction::Up)
 	, mShowExplosion(true)
 	, mPlayedExplosionSound(false)
+	, topLeftCorner(0.f,720.f)
+	, topRightCorner(1280.f,720.f)
+	, bottomLeftCorner(0.f,0.f)
+	, bottomRightCorner(1280.f, 720.f)
+	, deadCenter(640.f, 360.f)
 	, mTargetDirection()
 	, mDirectionIndex(0)
 	, mHealthDisplay(nullptr)
@@ -140,7 +145,7 @@ void Actor::updateCurrent(sf::Time dt, CommandQueue& commands)
 	if (state_ != State::Dead)
 		Entity::updateCurrent(dt, commands);
 	
-	//updateMovementPattern(dt);
+	updateMovementPattern(dt);
 }
 
 unsigned int Actor::getCategory() const
@@ -226,40 +231,73 @@ void Actor::playLocalSound(CommandQueue& commands, SoundEffect::ID effect)
 
 void Actor::updateMovementPattern(sf::Time dt)
 {
-	switch (mType) {
-	case Type::BlueBird:
-		setVelocity(10.f, 10.f);
-		const float approachRate = 200.f;
+	if (mType == Actor::Type::BlueBird) {
 
-		sf::Vector2f newVelocity = unitVector(approachRate * dt.asSeconds() * mTargetDirection + getVelocity());
-		newVelocity *= getMaxSpeed();
-		float angle = std::atan2(newVelocity.y, newVelocity.x);
+		switch (state_) {
+		case State::Idle:
+		case State::Fly:
+			idleMovements(dt);		
+			break;
+		case State::Attack:
+			//initate attack sequence
+			break;
+		case State::BeenAttacked:
+			//initiate out of idle
+			break;
+		case State::RunAway:
+			//initiate findNearestCorner
 
-		setVelocity(newVelocity);
-
-		mTravelledDistance += getMaxSpeed() * dt.asSeconds();
-
-		// Enemy: Movement pattern
-		auto directions = TABLE.at(mType).directions;
-
-		//if (!directions.empty()) {
-		//	if (mTravelledDistance > (directions[mDirectionIndex].distance))
-		//	{
-		//		mDirectionIndex = (++mDirectionIndex) % directions.size();
-		//		mTravelledDistance = 0;
-		//	}
-
-		//	float radians = toRadian(directions[mDirectionIndex].angle + 90.f);
-		//	float vx = getMaxSpeed() * std::cos(radians);
-		//	float vy = getMaxSpeed() * std::sin(radians);
-
-		//	setVelocity(vx, vy);
-		//	mTravelledDistance += getMaxSpeed() * dt.asSeconds();
-		//}
-		//	break;
-		//}
+			break;
+		}
 	}
 }
+
+void Actor::idleMovements(sf::Time dt)
+{
+	auto directions = TABLE.at(mType).directions;
+	if (!directions.empty()) {
+		if (mTravelledDistance > (directions[mDirectionIndex].distance))
+		{
+			direction_ = Direction::Left;
+			mDirectionIndex = (++mDirectionIndex) % directions.size();
+			mTravelledDistance = 0;
+			direction_ = Direction::Right;
+		}
+
+		float radians = toRadian(directions[mDirectionIndex].angle + 90.f);
+		float vx = getMaxSpeed() * std::cos(radians);
+		float vy = getMaxSpeed() * std::sin(radians);
+
+
+		setVelocity(vx, vy);
+		mTravelledDistance += getMaxSpeed() * dt.asSeconds();
+	}
+}
+
+sf::Vector2f Actor::findNearestCorner()
+{
+	sf::Vector2f currentLocation = this->getPosition();
+	// quadrant 1
+	if (currentLocation.x < deadCenter.x && currentLocation.y > deadCenter.y) {
+		return topLeftCorner;
+	}
+	//quadrant 2
+	else if (currentLocation.x > deadCenter.x && currentLocation.y > deadCenter.y) {
+		return topRightCorner;
+	}
+	//quadrant 3
+	else if (currentLocation.x < deadCenter.x && currentLocation.y < deadCenter.y) {
+		return bottomLeftCorner;
+	}
+	//quadrant 4
+	else if (currentLocation.x > deadCenter.x && currentLocation.y < deadCenter.y) {
+		return bottomRightCorner;
+	}
+	else {
+		return deadCenter;
+	}
+}
+
 
 void Actor::guideTowards(sf::Vector2f position)
 {

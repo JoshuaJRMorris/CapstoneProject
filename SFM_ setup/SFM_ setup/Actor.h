@@ -20,7 +20,7 @@ public:
 		TypeCount
 	};
 	enum class State {
-		Dead, Idle, Fly, Attack
+		Dead, Idle, Fly, Attack, RunAway, BeenAttacked,
 	};
 	enum class Direction
 	{
@@ -55,7 +55,8 @@ private:
 	virtual void			drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
 	virtual void 			updateCurrent(sf::Time dt, CommandQueue& commands);
 	void					updateMovementPattern(sf::Time dt);
-
+	void idleMovements(sf::Time dt);
+	sf::Vector2f findNearestCorner();
 
 	void					updateTexts();
 
@@ -71,6 +72,11 @@ private:
 	bool 					mShowExplosion;
 	bool					mPlayedExplosionSound;
 
+	sf::Vector2f topLeftCorner;
+	sf::Vector2f topRightCorner;
+	sf::Vector2f bottomLeftCorner;
+	sf::Vector2f bottomRightCorner;
+	sf::Vector2f deadCenter;
 	sf::Vector2f			mTargetDirection;
 	std::vector<Actor*>				mActiveEnemies;
 
