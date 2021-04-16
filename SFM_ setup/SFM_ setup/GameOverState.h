@@ -17,6 +17,9 @@ public:
 
 
 private:
+	sf::Time			mTextEffectTime;
+	bool				mShowText;
+	sf::Text			mText;
 	sf::Text			mGameOverText;
 	sf::Time			mElapsedTime;
 };

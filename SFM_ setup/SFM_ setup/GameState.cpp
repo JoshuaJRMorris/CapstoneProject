@@ -2,7 +2,14 @@
 #include "MusicPlayer.h"
 
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <random>
 
+namespace
+{
+	std::mt19937 rEng{ std::random_device{}() };
+	std::uniform_int_distribution<unsigned int> dist{ 1, 3 };
+
+}
 
 GameState::GameState(StateStack& stack, Context context)
 	: State(stack, context)
@@ -10,9 +17,20 @@ GameState::GameState(StateStack& stack, Context context)
 	, mPlayer(*context.player)
 {
 	mPlayer.setMissionStatus(Player::MissionRunning);
-
+	int random_Song(dist(rEng));
+	switch (random_Song) {
+	case 1:
+		context.music->play(Music::MissionTheme);
+		break;
+	case 2:
+		context.music->play(Music::SurfinBirdMetal);
+		break;
+	case 3:
+		context.music->play(Music::FreeBird);
+		break;
+	}
 	// Play game theme
-	context.music->play(Music::MissionTheme);
+	
 }
 
 void GameState::draw()

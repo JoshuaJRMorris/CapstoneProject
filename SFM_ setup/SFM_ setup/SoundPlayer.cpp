@@ -26,6 +26,8 @@ SoundPlayer::SoundPlayer()
 	mSoundBuffers.load(SoundEffect::LaunchMissile, "Media/Sound/LaunchMissile.wav");
 	mSoundBuffers.load(SoundEffect::CollectPickup, "Media/Sound/CollectPickup.wav");
 	mSoundBuffers.load(SoundEffect::Button, "Media/Sound/Button.wav");
+	mSoundBuffers.load(SoundEffect::Punch, "Media/Sound/Punch.wav");
+	mSoundBuffers.load(SoundEffect::Squak, "Media/Sound/Squak.wav");
 
 	// Listener points towards the screen (default in SFML)
 	sf::Listener::setDirection(0.f, 0.f, -1.f);

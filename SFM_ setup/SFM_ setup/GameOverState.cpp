@@ -1,6 +1,7 @@
 #include "GameOverState.h"
 #include "Utility.h"
 #include "Player.h"
+#include "MusicPlayer.h"
 #include "ResourceHolder.h"
 
 #include <SFML/Graphics/RectangleShape.hpp>
@@ -15,13 +16,16 @@ GameOverState::GameOverState(StateStack& stack, Context context)
 {
 	sf::Font& font = context.fonts->get(Fonts::Main);
 	sf::Vector2f windowSize(context.window->getSize());
-
+	
 	mGameOverText.setFont(font);
-	if (context.player->getMissionStatus() == Player::MissionFailure)
-		mGameOverText.setString("Mission failed!");
-	else
-		mGameOverText.setString("Mission successful!");
-
+	if (context.player->getMissionStatus() == Player::MissionFailure) {
+		mGameOverText.setString("Loser! The birds will rule the earth!\nPress any key to go back to the menu");
+		context.music->play(Music::SurfinBird);
+	}
+	else {
+		mGameOverText.setString("Winner! You've seen through\nthe government lies!\nPress any key to go back to the menu");
+		context.music->play(Music::Pigeons);
+	}
 	mGameOverText.setCharacterSize(70);
 	centerOrigin(mGameOverText);
 	mGameOverText.setPosition(0.5f * windowSize.x, 0.4f * windowSize.y);
@@ -45,7 +49,7 @@ bool GameOverState::update(sf::Time dt)
 {
 	// Show state for 3 seconds, after return to menu
 	mElapsedTime += dt;
-	if (mElapsedTime > sf::seconds(3))
+	if (mElapsedTime > sf::seconds(25))
 	{
 		requestStateClear();
 		requestStackPush(States::Menu);
@@ -53,7 +57,13 @@ bool GameOverState::update(sf::Time dt)
 	return false;
 }
 
-bool GameOverState::handleEvent(const sf::Event&)
+bool GameOverState::handleEvent(const sf::Event& event)
 {
-	return false;
+	if (event.type == sf::Event::KeyReleased)
+	{
+		requestStateClear();
+		requestStackPush(States::Menu);
+	}
+
+	return true;
 }

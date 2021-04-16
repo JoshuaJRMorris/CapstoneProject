@@ -65,6 +65,7 @@ Actor::Actor(Type type, const TextureHolder& textures, const FontHolder& fonts)
 
 	std::unique_ptr<TextNode> healthDisplay(new TextNode(fonts, ""));
 	mHealthDisplay = healthDisplay.get();
+	//mHealthDisplay->setScale(1.f, 1.f);
 	attachChild(std::move(healthDisplay));
 
 	mExplosion.setFrameSize(sf::Vector2i(256, 256));

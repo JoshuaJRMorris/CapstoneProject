@@ -19,7 +19,7 @@ std::map<Actor::Type, ActorData> initializeActorData()
 	data[Actor::Type::RedBird].texture = Textures::ID::RedBird;
 	data[Actor::Type::RedBird].speed = 400;
 	//data[Actor::Type::RedBird].damageDone = 10;
-	data[Actor::Type::RedBird].hitPoints = 200;
+	data[Actor::Type::RedBird].hitPoints = 300;
 
 	data[Actor::Type::RedBird].animations[Actor::State::Idle].addFrameSet(redFrames.getFramesFor("RedFlap"));
 	data[Actor::Type::RedBird].animations[Actor::State::Idle].setDuration(sf::seconds(0.2f));

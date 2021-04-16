@@ -8,6 +8,10 @@ MusicPlayer::MusicPlayer()
 {
 	mFilenames[Music::MenuTheme] = "Media/Music/DONLV.ogg";
 	mFilenames[Music::MissionTheme] = "Media/Music/Monster.ogg";
+	mFilenames[Music::SurfinBird] = "Media/Music/SurfinBirdTrashmen.ogg";
+	mFilenames[Music::SurfinBirdMetal] = "Media/Music/SurfinBird.ogg";
+	mFilenames[Music::FreeBird] = "Media/Music/FreeBird.ogg";
+	mFilenames[Music::Pigeons] = "Media/Music/Pigeons.ogg";
 }
 
 void MusicPlayer::play(Music::ID theme)

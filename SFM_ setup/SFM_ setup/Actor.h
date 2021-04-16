@@ -82,6 +82,8 @@ private:
 	sf::Vector2f			mTargetDirection;
 	std::vector<Actor*>				mActiveEnemies;
 
+
+
 	TextNode* mHealthDisplay;
 	float							mTravelledDistance;
 	std::size_t						mDirectionIndex;

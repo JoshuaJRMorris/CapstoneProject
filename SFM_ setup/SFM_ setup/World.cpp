@@ -22,7 +22,7 @@ World::World(sf::RenderTarget& outputTarget, FontHolder& fonts, SoundPlayer& sou
 	, mSceneLayers()
 	, mWorldBounds(0.f, 0.f, mWorldView.getSize().x, 5000.f)
 	, mSpawnPosition(mWorldView.getSize().x / 2.f, mWorldBounds.height - mWorldView.getSize().y / 2.f)
-	, enemySpawnPosition(mWorldView.getSize().x / 2.f, mWorldBounds.height - mWorldView.getSize().y / 2.f)
+	, enemySpawnPosition(mWorldView.getSize().x / 1.f, mWorldBounds.height - mWorldView.getSize().y / 2.f)
 	//, mScrollSpeed(-50.f)
 	, mPlayerCharacter(nullptr)
 	, mEnemySpawnPoints()
@@ -189,7 +189,8 @@ void World::handleCollisions()
 
 				if (player.getState() == Actor::State::Attack) {
 					enemy.damage(1);
-					
+					//mSounds.play(SoundEffect::Punch);
+					mSounds.play(SoundEffect::Punch);
 					//enemy.setState(Actor::State::BeenAttacked);
 					//enemy.destroy();
 					//enemy.setState(Actor::State::Dead);
@@ -198,9 +199,12 @@ void World::handleCollisions()
 				if (mEnemyCharacter->getHitpoints() >= 200 ){//&& enemy.getState() == Actor::State::BeenAttacked) {
 					enemy.setState(Actor::State::Attack);
 					player.damage(1);
+					mSounds.play(SoundEffect::Squak);
 				}
 				else {
 					enemy.setState(Actor::State::RunAway);
+					player.damage(1);
+					mSounds.play(SoundEffect::Squak);
 				}
 				
 				/*else {

@@ -57,6 +57,8 @@ namespace SoundEffect
 		LaunchMissile,
 		CollectPickup,
 		Button,
+		Punch,
+		Squak,
 	};
 }
 
@@ -66,6 +68,10 @@ namespace Music
 	{
 		MenuTheme,
 		MissionTheme,
+		SurfinBird,
+		SurfinBirdMetal,
+		FreeBird,
+		Pigeons
 	};
 }
 
