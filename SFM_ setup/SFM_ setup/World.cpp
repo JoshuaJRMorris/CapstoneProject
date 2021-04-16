@@ -22,6 +22,7 @@ World::World(sf::RenderTarget& outputTarget, FontHolder& fonts, SoundPlayer& sou
 	, mSceneLayers()
 	, mWorldBounds(0.f, 0.f, mWorldView.getSize().x, 5000.f)
 	, mSpawnPosition(mWorldView.getSize().x / 2.f, mWorldBounds.height - mWorldView.getSize().y / 2.f)
+	, enemySpawnPosition(mWorldView.getSize().x / 2.f, mWorldBounds.height - mWorldView.getSize().y / 2.f)
 	//, mScrollSpeed(-50.f)
 	, mPlayerCharacter(nullptr)
 	, mEnemySpawnPoints()
@@ -63,6 +64,8 @@ void World::update(sf::Time dt)
 	adaptPlayerPosition();
 
 	updateSounds();
+
+	
 }
 
 void World::draw()
@@ -94,13 +97,17 @@ bool World::hasAlivePlayer() const
 
 bool World::hasPlayerReachedEnd() const
 {
-	return !mWorldBounds.contains(mPlayerCharacter->getPosition());
+	if (mEnemyCharacter->isMarkedForRemoval()) {
+		return true;
+	}
+
+	return false;
 }
 
 void World::loadTextures()
 {
-	mTextures.load(Textures::RedBird, "Media/Textures/UpdatedBirds.png");
-	mTextures.load(Textures::BlueBird, "Media/Textures/UpdatedBirds.png");
+	mTextures.load(Textures::RedBird, "Media/Textures/RedBirds.png");
+	mTextures.load(Textures::BlueBird, "Media/Textures/BlueBirds.png");
 	mTextures.load(Textures::Explosion, "Media/Textures/Explosion.png");
 
 
@@ -123,6 +130,13 @@ void World::adaptPlayerPosition()
 	position.y = std::max(position.y, viewBounds.top + borderDistance);
 	position.y = std::min(position.y, viewBounds.top + viewBounds.height - borderDistance);
 	mPlayerCharacter->setPosition(position);
+
+	position = mEnemyCharacter->getPosition();
+	position.x = std::max(position.x, viewBounds.left + borderDistance);
+	position.x = std::min(position.x, viewBounds.left + viewBounds.width - borderDistance);
+	position.y = std::max(position.y, viewBounds.top + borderDistance);
+	position.y = std::min(position.y, viewBounds.top + viewBounds.height - borderDistance);
+	mEnemyCharacter->setPosition(position);
 	
 }
 
@@ -175,12 +189,23 @@ void World::handleCollisions()
 
 				if (player.getState() == Actor::State::Attack) {
 					enemy.damage(1);
+					
+					//enemy.setState(Actor::State::BeenAttacked);
 					//enemy.destroy();
 					//enemy.setState(Actor::State::Dead);
-					
 					break;
-					
 				}
+				if (mEnemyCharacter->getHitpoints() >= 200 ){//&& enemy.getState() == Actor::State::BeenAttacked) {
+					enemy.setState(Actor::State::Attack);
+					player.damage(1);
+				}
+				else {
+					enemy.setState(Actor::State::RunAway);
+				}
+				
+				/*else {
+					enemy.setState(Actor::State::BeenAttacked);
+				}*/
 				//enemy.accelerate(sf::Vector2f(-10, 0.f));
 				
 				//player.setState(Actor::State::Fly);
@@ -247,8 +272,14 @@ void World::buildScene()
 	//mPlayerAircraft->setScale(5, 5);
 	mSceneLayers[UpperAir]->attachChild(std::move(player));
 
+	std::unique_ptr<Actor> enemy(new Actor(Actor::Type::BlueBird, mTextures, mFonts));
+	mEnemyCharacter = enemy.get();
+	mEnemyCharacter->setPosition(enemySpawnPosition);
+	//mPlayerAircraft->setScale(5, 5);
+	mSceneLayers[UpperAir]->attachChild(std::move(enemy));
+
 	// Add enemy 
-	addEnemies();
+	//addEnemies();
 }
 
 void World::addEnemies()
@@ -280,41 +311,55 @@ void World::addEnemies()
 	//addEnemy(Aircraft::Raptor, 200.f, 4200.f);
 	//addEnemy(Aircraft::Raptor, 0.f, 4400.f);
 
-	addEnemy(Actor::Type::BlueBird, 400.f, 100.f);
+	//addEnemy(Actor::Type::BlueBird, 400.f, 100.f);
 	//addEnemy(Actor::GreyBird, 400.f, 0.f);
 
 
 	// Sort all enemies according to their y value, such that lower enemies are checked first for spawning
-	std::sort(mEnemySpawnPoints.begin(), mEnemySpawnPoints.end(), [](SpawnPoint lhs, SpawnPoint rhs)
-		{
-			return lhs.y < rhs.y;
-		});
+	//std::sort(mEnemySpawnPoints.begin(), mEnemySpawnPoints.end(), [](SpawnPoint lhs, SpawnPoint rhs)
+	//	{
+	//		return lhs.y < rhs.y;
+	//	});
 }
 
 void World::addEnemy(Actor::Type type, float relX, float relY)
 {
-	SpawnPoint spawn(type, mSpawnPosition.x + relX, mSpawnPosition.y - relY);
-	mEnemySpawnPoints.push_back(spawn);
+	//SpawnPoint spawn(type, mSpawnPosition.x + relX, mSpawnPosition.y - relY);
+	//std::unique_ptr<Actor> enemy(new Actor(spawn.type, mTextures, mFonts));
+	//enemy->setPosition(spawn.x, spawn.y);
+	//mSceneLayers[UpperAir]->attachChild(std::move(enemy));
+
+	//sf::FloatRect viewBounds = getViewBounds();
+	//const float borderDistance = 40.f;
+
+	//sf::Vector2f position = enemy->getPosition();
+	//position.x = std::max(position.x, viewBounds.left + borderDistance);
+	//position.x = std::min(position.x, viewBounds.left + viewBounds.width - borderDistance);
+	//position.y = std::max(position.y, viewBounds.top + borderDistance);
+	//position.y = std::min(position.y, viewBounds.top + viewBounds.height - borderDistance);
+	//enemy->setPosition(position);
+
 }
 
 void World::spawnEnemies()
 {
-	// Spawn all enemies entering the view area (including distance) this frame
-	while (!mEnemySpawnPoints.empty()
-		&& mEnemySpawnPoints.back().y > getBattlefieldBounds().top)
-	{
-		SpawnPoint spawn = mEnemySpawnPoints.back();
+	//// Spawn all enemies entering the view area (including distance) this frame
+	//while (!mEnemySpawnPoints.empty()
+	//	&& mEnemySpawnPoints.back().y > getBattlefieldBounds().top)
+	//{
+	//	SpawnPoint spawn = mEnemySpawnPoints.back();
 
-		std::unique_ptr<Actor> enemy(new Actor(spawn.type, mTextures, mFonts));
-		enemy->setPosition(spawn.x, spawn.y);
-		//enemy->setScale(5, 5);
-		//enemy->setRotation(180.f);
+	//	std::unique_ptr<Actor> enemy(new Actor(spawn.type, mTextures, mFonts));
 
-		mSceneLayers[UpperAir]->attachChild(std::move(enemy));
 
-		// Enemy is spawned, remove from the list to spawn
-		mEnemySpawnPoints.pop_back();
-	}
+	//	//enemy->setScale(5, 5);
+	//	//enemy->setRotation(180.f);
+
+	//	mSceneLayers[UpperAir]->attachChild(std::move(enemy));
+
+	//	// Enemy is spawned, remove from the list to spawn
+	//	mEnemySpawnPoints.pop_back();
+	//}
 }
 
 void World::destroyEntitiesOutsideView()
@@ -329,49 +374,13 @@ void World::destroyEntitiesOutsideView()
 	mCommandQueue.push(command);
 }
 
-void World::guideMissiles()
+void World::guideBird()
 {
-	//// Setup command that stores all enemies in mActiveEnemies
-	//Command enemyCollector;
-	//enemyCollector.category = Category::EnemyAircraft;
-	//enemyCollector.action = derivedAction<Actor>([this](Actor& enemy, sf::Time)
-	//	{
-	//		if (!enemy.isDestroyed())
-	//			mActiveEnemies.push_back(&enemy);
+	//Command birdGuider;
+	////birdGuider.category == Category::EnemyCharacter;
+	//birdGuider.action = derivedAction<Actor>([this](Actor& bird, sf::Time) {
+	//	bird.flyTowards(mPlayerCharacter->getWorldPosition());
 	//	});
-
-	//// Setup command that guides all missiles to the enemy which is currently closest to the player
-	//Command missileGuider;
-	//missileGuider.category = Category::AlliedProjectile;
-	//missileGuider.action = derivedAction<Projectile>([this](Projectile& missile, sf::Time)
-	//	{
-	//		// Ignore unguided bullets
-	//		if (!missile.isGuided())
-	//			return;
-
-	//		float minDistance = std::numeric_limits<float>::max();
-	//		Actor* closestEnemy = nullptr;
-
-	//		// Find closest enemy
-	//		for (Actor * enemy : mActiveEnemies)
-	//		{
-	//			float enemyDistance = distance(missile, *enemy);
-
-	//			if (enemyDistance < minDistance)
-	//			{
-	//				closestEnemy = enemy;
-	//				minDistance = enemyDistance;
-	//			}
-	//		}
-
-	//		if (closestEnemy)
-	//			missile.guideTowards(closestEnemy->getWorldPosition());
-	//	});
-
-	//// Push commands, reset active enemies
-	//mCommandQueue.push(enemyCollector);
-	//mCommandQueue.push(missileGuider);
-	//mActiveEnemies.clear();
 }
 
 sf::FloatRect World::getViewBounds() const

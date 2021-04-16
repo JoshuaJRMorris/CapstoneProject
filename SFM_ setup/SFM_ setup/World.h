@@ -48,7 +48,7 @@ private:
 	void								addEnemy(Actor::Type type, float relX, float relY);
 	void								spawnEnemies();
 	void								destroyEntitiesOutsideView();
-	void								guideMissiles();
+	void								guideBird();
 	sf::FloatRect						getViewBounds() const;
 	sf::FloatRect						getBattlefieldBounds() const;
 
@@ -91,8 +91,10 @@ private:
 
 	sf::FloatRect						mWorldBounds;
 	sf::Vector2f						mSpawnPosition;
+	sf::Vector2f						enemySpawnPosition;
 	float								mScrollSpeed;
 	Actor* mPlayerCharacter;
+	Actor* mEnemyCharacter;
 
 	std::vector<SpawnPoint>				mEnemySpawnPoints;
 	std::vector<Actor*>				mActiveEnemies;

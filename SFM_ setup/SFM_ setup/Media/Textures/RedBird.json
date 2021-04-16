@@ -1,7 +1,7 @@
 {"frames": [
 
 {
-	"filename": "RedMoveLeft 1.png",
+	"filename": "Blue 1.png",
 	"frame": {"x":1,"y":1,"w":16,"h":15},
 	"rotated": false,
 	"trimmed": true,
@@ -9,7 +9,7 @@
 	"sourceSize": {"w":16,"h":16}
 },
 {
-	"filename": "RedMoveLeft 2.png",
+	"filename": "Blue 2.png",
 	"frame": {"x":19,"y":1,"w":16,"h":15},
 	"rotated": false,
 	"trimmed": true,
@@ -17,7 +17,7 @@
 	"sourceSize": {"w":16,"h":16}
 },
 {
-	"filename": "RedMoveRight 1.png",
+	"filename": "Red 1.png",
 	"frame": {"x":37,"y":1,"w":16,"h":15},
 	"rotated": false,
 	"trimmed": true,
@@ -25,8 +25,24 @@
 	"sourceSize": {"w":16,"h":16}
 },
 {
-	"filename": "RedMoveRight 2.png",
+	"filename": "Red 2.png",
 	"frame": {"x":55,"y":1,"w":16,"h":15},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":16,"h":15},
+	"sourceSize": {"w":16,"h":16}
+},
+{
+	"filename": "RedBirdAttack1 1.png",
+	"frame": {"x":37,"y":1,"w":16,"h":15},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":16,"h":15},
+	"sourceSize": {"w":16,"h":16}
+},
+{
+	"filename": "RedBirdAttack1 2.png",
+	"frame": {"x":73,"y":1,"w":16,"h":15},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":1,"w":16,"h":15},
@@ -37,8 +53,8 @@
 	"version": "1.0",
 	"image": "RedBird.png",
 	"format": "RGBA8888",
-	"size": {"w":72,"h":17},
+	"size": {"w":90,"h":17},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:bce38f9664628c003e1d264ec30fa4eb:c2aee61b4fccb17156e90fb6bdcdbe67:be8bbaee9bad13ff5df2b5aef00527b4$"
+	"smartupdate": "$TexturePacker:SmartUpdate:d397aff42a835ed0dc0d47b83f7db7c4:98c7a558040e208b847c26894164f290:be8bbaee9bad13ff5df2b5aef00527b4$"
 }
 }

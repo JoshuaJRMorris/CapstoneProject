@@ -6,7 +6,8 @@
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":1,"w":16,"h":15},
-	"sourceSize": {"w":16,"h":16}
+	"sourceSize": {"w":16,"h":16},
+	"pivot": {"x":0.5,"y":0.5}
 },
 {
 	"filename": "Blue 2.png",
@@ -14,47 +15,70 @@
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":1,"w":16,"h":15},
-	"sourceSize": {"w":16,"h":16}
+	"sourceSize": {"w":16,"h":16},
+	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "RedBirdAttack1 1.png",
+	"filename": "BlueBirdAttack1 1.png",
+	"frame": {"x":1,"y":1,"w":16,"h":15},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":16,"h":15},
+	"sourceSize": {"w":16,"h":16},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "BlueBirdAttack1 2.png",
 	"frame": {"x":37,"y":1,"w":16,"h":15},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":1,"w":16,"h":15},
-	"sourceSize": {"w":16,"h":16}
+	"sourceSize": {"w":16,"h":16},
+	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "RedBirdAttack1 2.png",
+	"filename": "RedBirdAttack1 1.png",
 	"frame": {"x":55,"y":1,"w":16,"h":15},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":1,"w":16,"h":15},
-	"sourceSize": {"w":16,"h":16}
+	"sourceSize": {"w":16,"h":16},
+	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "RedFlap 1.png",
-	"frame": {"x":37,"y":1,"w":16,"h":15},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":1,"w":16,"h":15},
-	"sourceSize": {"w":16,"h":16}
-},
-{
-	"filename": "RedFlap 2.png",
+	"filename": "RedBirdAttack1 2.png",
 	"frame": {"x":73,"y":1,"w":16,"h":15},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":1,"w":16,"h":15},
-	"sourceSize": {"w":16,"h":16}
+	"sourceSize": {"w":16,"h":16},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "RedFlap 1.png",
+	"frame": {"x":55,"y":1,"w":16,"h":15},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":16,"h":15},
+	"sourceSize": {"w":16,"h":16},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "RedFlap 2.png",
+	"frame": {"x":91,"y":1,"w":16,"h":15},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":16,"h":15},
+	"sourceSize": {"w":16,"h":16},
+	"pivot": {"x":0.5,"y":0.5}
 }],
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "UpdatedBirds.png",
 	"format": "RGBA8888",
-	"size": {"w":90,"h":17},
+	"size": {"w":108,"h":17},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:f4dd7143982df51e9b14d9e5ea7997ad:1ae18ce504b0ca24826b7939c3a211c5:f4f89ff233e7ac0fc5b4b0dedb2ee509$"
+	"smartupdate": "$TexturePacker:SmartUpdate:2f59fabd0605e6ffc9285afc1a21cfe9:b319c9e9cf57e598480e18552dfbd0bf:f4f89ff233e7ac0fc5b4b0dedb2ee509$"
 }
 }

@@ -92,8 +92,8 @@ void Actor::updateStates()
 		attack_ = false;
 	}
 
-	if (state_ == Actor::State::Idle && length(getVelocity()) > 0.1f)
-		state_ = Actor::State::Fly;
+	//if (state_ == Actor::State::Idle && length(getVelocity()) > 0.1f)
+	//	state_ = Actor::State::Fly;
 		
 }
 
@@ -236,17 +236,20 @@ void Actor::updateMovementPattern(sf::Time dt)
 		switch (state_) {
 		case State::Idle:
 		case State::Fly:
+			
 			idleMovements(dt);		
 			break;
 		case State::Attack:
 			//initate attack sequence
 			break;
 		case State::BeenAttacked:
+			flyTowards(dt, deadCenter);
+			
 			//initiate out of idle
 			break;
 		case State::RunAway:
 			//initiate findNearestCorner
-
+			flyTowards(dt, findNearestCorner());
 			break;
 		}
 	}
@@ -274,6 +277,21 @@ void Actor::idleMovements(sf::Time dt)
 	}
 }
 
+void Actor::flyTowards(sf::Time dt, sf::Vector2f position)
+{
+	
+	mTargetDirection = unitVector(position - getWorldPosition());
+
+	const float approachRate = 200.f;
+
+	sf::Vector2f newVelocity = unitVector(approachRate * dt.asSeconds() * mTargetDirection + getVelocity());
+	newVelocity *= getMaxSpeed() * 2;
+	float angle = std::atan2(newVelocity.y, newVelocity.x);
+
+	setRotation(toDegree(angle) + 90.f);
+	setVelocity(newVelocity);
+}
+
 sf::Vector2f Actor::findNearestCorner()
 {
 	sf::Vector2f currentLocation = this->getPosition();
@@ -299,10 +317,7 @@ sf::Vector2f Actor::findNearestCorner()
 }
 
 
-void Actor::guideTowards(sf::Vector2f position)
-{
-	mTargetDirection = unitVector(position - getWorldPosition());
-}
+
 
 void Actor::updateTexts()
 {

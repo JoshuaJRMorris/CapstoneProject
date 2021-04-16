@@ -37,7 +37,8 @@ public:
 	virtual bool 			isMarkedForRemoval() const;
 	void					attack();
 
-	void guideTowards(sf::Vector2f position);
+	//void guideTowards(sf::Vector2f position);
+	void flyTowards(sf::Time dt, sf::Vector2f position);
 
 	float					getMaxSpeed() const;
 
@@ -56,6 +57,7 @@ private:
 	virtual void 			updateCurrent(sf::Time dt, CommandQueue& commands);
 	void					updateMovementPattern(sf::Time dt);
 	void idleMovements(sf::Time dt);
+
 	sf::Vector2f findNearestCorner();
 
 	void					updateTexts();
